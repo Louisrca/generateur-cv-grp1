@@ -9,9 +9,9 @@ Cette application est un Générateur de CV permettant aux utilisateurs de :
 
 ## Pour accéder au projet :
 
-Le back du projet est hebergé sur Render.com via : [exemple de lien](https://exemple.com)
+Le back du projet est hébergé sur Render.com via : [exemple de lien](https://exemple.com)
 
-Le front du projet est herbé sur Render.com via : [exemple de lien](https://exemple.com)
+Le front du projet est hébergé sur Render.com via : [exemple de lien](https://exemple.com)
 
 
 
