@@ -10,7 +10,7 @@ Cette application est un Générateur de CV permettant aux utilisateurs de :
 Le back du projet est hebergé sur Render.com via : [exemple de lien](https://exemple.com)
 Le front du projet est herbé sur Render.com via : [exemple de lien](https://exemple.com)
 
-Pour run le projet en local, ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.locale.exempe
+Pour run le projet en local, ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.local.exempe
 
 ## Pour lancer le back en local :
 
