@@ -20,9 +20,20 @@ const getCurriculumById = async (req, res) => {
 
 const createCurriculum = (req, res) => {
   const newCurriculum = new Curriculum({
-    title: req.body.title,
-    totalPages: req.body.totalPages,
+    name: req.body.name,
+    lastname: req.body.lastname,
+    jobTitle: req.body.jobTitle,
+    email: req.body.email,
+    phone: req.body.phone,
+    linkedin: req.body.linkedin,
+    github: req.body.github,
+    skills: req.body.skills,
+    languages: req.body.languages,
+    technicalSkills: req.body.technicalSkills,
     description: req.body.description,
+    educations: req.body.educations,
+    experiences: req.body.experiences,
+    areaOfInterests: req.body.areaOfInterests,
     createAt: Date.now(),
     updateAt: Date.now(),
     author: req.user,

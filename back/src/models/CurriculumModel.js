@@ -7,7 +7,7 @@ const CurriculumSchema = Schema({
     required: true,
   },
   lastname: {
-    type: Number,
+    type: String,
     required: true,
   },
   jobTitle: {
@@ -62,7 +62,7 @@ const CurriculumSchema = Schema({
     required: false,
   },
 
-  experience: {
+  experiences: {
     type: [
       {
         title: { type: String, required: true },
@@ -74,7 +74,7 @@ const CurriculumSchema = Schema({
     ],
     required: true,
   },
-  education: {
+  educations: {
     type: [
       {
         school: { type: String, required: true },
@@ -86,7 +86,7 @@ const CurriculumSchema = Schema({
     ],
     required: true,
   },
-  areaOfInterest: {
+  areaOfInterests: {
     type: [String],
     required: false,
   },

@@ -9,17 +9,17 @@ module.exports = {
         name: {
           type: 'string',
           minLenght: 1,
-          errorMessage: 'Invalid title or missing title',
+          errorMessage: 'Invalid name or missing name',
         },
         lastname: {
-          type: 'number',
+          type: 'string',
           min: 1,
-          errorMessage: 'Invalid totalPages or missing totalPages',
+          errorMessage: 'Invalid lastname or missing lastname',
         },
         email: {
           type: 'string',
           minLenght: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid email or missing email',
         },
         description: {
           type: 'string',
@@ -29,40 +29,56 @@ module.exports = {
         phone: {
           type: 'string',
           minLenght: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid phone or missing phone',
         },
         linkedin: {
           type: 'string',
           minLenght: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid linkedin or missing linkedin',
         },
         github: {
           type: 'string',
           minLenght: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid github or missing github',
         },
         skills: {
           type: 'array',
           minItems: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid skills or missing skills',
         },
-        experience: {
+        languages: {
           type: 'array',
           minItems: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid languages or missing languages',
         },
-        education: {
+        technicalSkills: {
           type: 'array',
           minItems: 1,
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid technicalSkills or missing technicalSkills',
+        },
+        experiences: {
+          type: 'array',
+          minItems: 1,
+          errorMessage: 'Invalid experiences or missing experiences',
+        },
+        educations: {
+          type: 'array',
+          minItems: 1,
+          errorMessage: 'Invalid educations or missing educations',
+        },
+
+        areaOfInterests: {
+          type: 'array',
+          minItems: 1,
+          errorMessage: 'Invalid areaOfInterest or missing areaOfInterest',
         },
         creationAt: {
           type: 'date',
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid creationAt or missing creationAt',
         },
         updateAt: {
           type: 'date',
-          errorMessage: 'Invalid description or missing description',
+          errorMessage: 'Invalid updateAt or missing updateAt',
         },
       },
       required: [
@@ -71,9 +87,11 @@ module.exports = {
         'email',
         'phone',
         'description',
-        'education',
-        'experience',
+        'educations',
+        'experiences',
         'skills',
+        'languages',
+        'technicalSkills',
       ],
     };
     let validationResponse = validator.validate(req.body, curriculumSchema);

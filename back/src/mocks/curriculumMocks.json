@@ -1,0 +1,80 @@
+{
+  "name": "John",
+  "lastname": "Doe",
+  "jobTitle": "Full Stack Developer",
+  "email": "john.doe@example.com",
+  "description": "Passionate developer with experience in modern web technologies.",
+  "phone": "+123456789",
+  "linkedin": "https://linkedin.com/in/johndoe",
+  "github": "https://github.com/johndoe",
+  "skills": ["Problem-solving", "Team collaboration", "Critical thinking"],
+  "languages": [
+    {
+      "name": "English",
+      "level": "Fluent"
+    },
+    {
+      "name": "French",
+      "level": "Intermediate"
+    }
+  ],
+  "technicalSkills": [
+    {
+      "category": "Web Languages",
+      "skills": [
+        { "name": "HTML", "level": "Expert" },
+        { "name": "CSS", "level": "Expert" }
+      ]
+    },
+    {
+      "category": "Programming Languages",
+      "skills": [
+        { "name": "JavaScript", "level": "Expert" },
+        { "name": "TypeScript", "level": "Intermediate" }
+      ]
+    },
+    {
+      "category": "Frameworks",
+      "skills": [
+        { "name": "React.js", "level": "Expert" },
+        { "name": "Next.js", "level": "Advanced" }
+      ]
+    }
+  ],
+  "experiences": [
+    {
+      "title": "Software Engineer",
+      "company": "Tech Solutions",
+      "startYear": "2020-01-01",
+      "endYear": "2022-12-31",
+      "description": "Developed scalable web applications and optimized system performance."
+    },
+    {
+      "title": "Junior Developer",
+      "company": "CodeFactory",
+      "startYear": "2018-01-01",
+      "endYear": "2019-12-31",
+      "description": "Assisted in building client-side applications and debugging legacy code."
+    }
+  ],
+  "educations": [
+    {
+      "school": "Tech University",
+      "degree": "Bachelor of Computer Science",
+      "fieldOfStudy": "Software Engineering",
+      "startYear": "2015-09-01",
+      "endYear": "2019-06-30"
+    },
+    {
+      "school": "Online Academy",
+      "degree": "Certified React Developer",
+      "startYear": "2021-02-01",
+      "endYear": "2021-08-01"
+    }
+  ],
+  "areaOfInterests": [
+    "Artificial Intelligence",
+    "Cybersecurity",
+    "Open Source Development"
+  ]
+}
