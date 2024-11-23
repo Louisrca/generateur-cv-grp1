@@ -1,4 +1,4 @@
-### Générateur de CV
+# Générateur de CV
 
 Cette application est un Générateur de CV permettant aux utilisateurs de :
 - S'inscrire et gérer leur compte.
@@ -12,7 +12,7 @@ Le front du projet est herbé sur Render.com via : [exemple de lien](https://exe
 
 Pour run le projet en local, ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.locale.exempe
 
-# Pour lancer le back :
+## Pour lancer le back :
 
 ```shell
 cd back
@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-# Pour lancer le front : 
+## Pour lancer le front : 
 ```shell
 cd web
 npm install
