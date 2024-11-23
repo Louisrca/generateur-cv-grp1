@@ -7,12 +7,16 @@ Cette application est un Générateur de CV permettant aux utilisateurs de :
 - Consulter les CV d'autres utilisateurs.
 - Laisser et gérer des recommandations sur les CV.
 
+## Pour accéder au projet :
+
 Le back du projet est hebergé sur Render.com via : [exemple de lien](https://exemple.com)
+
 Le front du projet est herbé sur Render.com via : [exemple de lien](https://exemple.com)
 
-Pour run le projet en local, ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.local.exempe
+
 
 ## Pour lancer le back en local :
+*ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.local.exempe*
 
 ```shell
 cd back
