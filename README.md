@@ -12,7 +12,7 @@ Le front du projet est herbé sur Render.com via : [exemple de lien](https://exe
 
 Pour run le projet en local, ajouté les valeurs adaptées à votre .env en suivant l'exemple de .env.locale.exempe
 
-## Pour lancer le back :
+## Pour lancer le back en local :
 
 ```shell
 cd back
@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-## Pour lancer le front : 
+## Pour lancer le front en local : 
 ```shell
 cd web
 npm install
