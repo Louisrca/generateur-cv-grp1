@@ -21,7 +21,7 @@ npm run dev
 ```
 
 # Pour lancer le front : 
-```
+```shell
 cd web
 npm install
 npm run dev
