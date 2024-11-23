@@ -1,25 +1,25 @@
-const Book = require('../models/BooksModel');
-const { verifyBook } = require('../validator/BookValidator');
+const Curriculum = require('../models/CurriculumModel');
+const { verifyCurriculum } = require('../validator/CurriculumValidator');
 
-const getBooks = async (req, res) => {
+const getCurriculums = async (req, res) => {
   try {
-    const products = await Book.find();
+    const products = await Curriculum.find();
     return res.json(products);
   } catch (error) {
     return res.status(500).json({ error: `Internal server error : ${error}` });
   }
 };
 
-const getBookById = async (req, res) => {
-  const book = await Book.findById(req.params.id);
-  if (!book) {
-    return res.status(404).json({ error: 'Book not found' });
+const getCurriculumById = async (req, res) => {
+  const Curriculum = await Curriculum.findById(req.params.id);
+  if (!Curriculum) {
+    return res.status(404).json({ error: 'Curriculum not found' });
   }
-  return res.json(book);
+  return res.json(Curriculum);
 };
 
-const createBook = (req, res) => {
-  const newBook = new Book({
+const createCurriculum = (req, res) => {
+  const newCurriculum = new Curriculum({
     title: req.body.title,
     totalPages: req.body.totalPages,
     description: req.body.description,
@@ -28,17 +28,17 @@ const createBook = (req, res) => {
     author: req.user,
   });
 
-  const isBookValid = verifyBook(req);
+  const isCurriculumValid = verifyCurriculum(req);
 
-  if (isBookValid) {
-    return res.status(400).json({ error: verifyBook(req, res) });
+  if (isCurriculumValid) {
+    return res.status(400).json({ error: verifyCurriculum(req, res) });
   }
 
-  newBook
+  newCurriculum
     .save()
-    .then((book) => {
+    .then((Curriculum) => {
       const status = (res.status = 200);
-      return res.send({ status, book });
+      return res.send({ status, Curriculum });
     })
     .catch((err) => {
       res.status = 400;
@@ -46,21 +46,20 @@ const createBook = (req, res) => {
     });
 };
 
-const updateBook = async (req, res) => {
-  const book = await Book.findById(req.params.id);
-  if (!book) {
-    return res.status(404).json({ error: 'Book not found' });
+const updateCurriculum = async (req, res) => {
+  const Curriculum = await Curriculum.findById(req.params.id);
+  if (!Curriculum) {
+    return res.status(404).json({ error: 'Curriculum not found' });
   }
-  book.title = req.body.title;
-  book.totalPages = req.body.totalPages;
-  book.description = req.body.description;
-  book.updateAt = Date.now();
+  Curriculum.title = req.body.title;
+  Curriculum.totalPages = req.body.totalPages;
+  Curriculum.description = req.body.description;
+  Curriculum.updateAt = Date.now();
 
-  book
-    .save()
-    .then((book) => {
+  Curriculum.save()
+    .then((Curriculum) => {
       const status = (res.status = 200);
-      return res.send({ status, book });
+      return res.send({ status, Curriculum });
     })
     .catch((err) => {
       res.status = 400;
@@ -68,15 +67,14 @@ const updateBook = async (req, res) => {
     });
 };
 
-const deleteBook = async (req, res) => {
-  const book = await Book.findById(req.params.id);
-  if (!book) {
-    return res.status(404).json({ error: 'Book not found' });
+const deleteCurriculum = async (req, res) => {
+  const Curriculum = await Curriculum.findById(req.params.id);
+  if (!Curriculum) {
+    return res.status(404).json({ error: 'Curriculum not found' });
   }
-  book
-    .deleteOne()
+  Curriculum.deleteOne()
     .then(() => {
-      return res.status(200).json({ message: `Book deleted` });
+      return res.status(200).json({ message: `Curriculum deleted` });
     })
     .catch((err) => {
       return res.status(400).json({ error: err.message });
@@ -84,9 +82,9 @@ const deleteBook = async (req, res) => {
 };
 
 module.exports = {
-  getBooks,
-  getBookById,
-  createBook,
-  updateBook,
-  deleteBook,
+  getCurriculums,
+  getCurriculumById,
+  createCurriculum,
+  updateCurriculum,
+  deleteCurriculum,
 };

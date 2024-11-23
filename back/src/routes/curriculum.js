@@ -3,21 +3,21 @@ const router = express.Router();
 const verifyToken = require('../middleware/jwt');
 
 const {
-  getBooks,
-  getBookById,
-  createBook,
-  updateBook,
-  deleteBook,
-} = require('../controllers/BooksControllers');
+  getCurriculums,
+  getCurriculumById,
+  createCurriculum,
+  updateCurriculum,
+  deleteCurriculum,
+} = require('../controllers/CurriculumControllers');
 
-router.get('/', verifyToken, getBooks);
+router.get('/', verifyToken, getCurriculums);
 
-router.get('/:id', verifyToken, getBookById);
+router.get('/:id', verifyToken, getCurriculumById);
 
-router.post('/', verifyToken, createBook);
+router.post('/', verifyToken, createCurriculum);
 
-router.put('/:id', verifyToken, updateBook);
+router.put('/:id', verifyToken, updateCurriculum);
 
-router.delete('/:id', verifyToken, deleteBook);
+router.delete('/:id', verifyToken, deleteCurriculum);
 
 module.exports = router;

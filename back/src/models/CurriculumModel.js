@@ -1,4 +1,3 @@
-const { json } = require('express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -9,6 +8,10 @@ const CurriculumSchema = Schema({
   },
   lastname: {
     type: Number,
+    required: true,
+  },
+  jobTitle: {
+    type: String,
     required: true,
   },
   email: {
@@ -32,16 +35,60 @@ const CurriculumSchema = Schema({
     required: false,
   },
   skills: {
-    type: json,
+    type: [String],
     required: true,
   },
+  languages: {
+    type: [
+      {
+        name: { type: String, required: true },
+        level: { type: String, required: true },
+      },
+    ],
+    required: false,
+  },
+  technicalSkills: {
+    type: [
+      {
+        category: { type: String, required: true }, // Exemple : "Langages Web", "Framework", etc.
+        skills: [
+          {
+            name: { type: String, required: true }, // Exemple : "HTML", "React.js"
+            level: { type: String, required: false }, // Exemple : "Débutant", "Avancé" (optionnel)
+          },
+        ],
+      },
+    ],
+    required: false,
+  },
+
   experience: {
-    type: json,
+    type: [
+      {
+        title: { type: String, required: true },
+        company: { type: String, required: true },
+        startYear: { type: Date, required: true },
+        endYear: { type: Date, required: false },
+        description: { type: String, required: false },
+      },
+    ],
     required: true,
   },
   education: {
-    type: json,
+    type: [
+      {
+        school: { type: String, required: true },
+        degree: { type: String, required: true },
+        fieldOfStudy: { type: String, required: false },
+        startYear: { type: Date, required: true },
+        endYear: { type: Date, required: false },
+      },
+    ],
     required: true,
+  },
+  areaOfInterest: {
+    type: [String],
+    required: false,
   },
   creationAt: {
     type: Date,
