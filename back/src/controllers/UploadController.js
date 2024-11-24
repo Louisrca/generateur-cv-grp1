@@ -1,5 +1,4 @@
 const Image = require('../models/Image');
-const fs = require('fs');
 
 exports.uploadImage = async (req, res) => {
     try{
@@ -9,8 +8,6 @@ exports.uploadImage = async (req, res) => {
             })
         }
 
-        const image = fs.readFileSync(req.file.path);
-
         const newImage = new Image({
             name: req.file.originalName,
             image: {
@@ -19,8 +16,6 @@ exports.uploadImage = async (req, res) => {
             }
         });
         const saveImage = await newImage.save();
-
-        fs.unlinkSync(req.file.path);
 
         res.status(200).send({
             message:'Image save in MongoDB',
