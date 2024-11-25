@@ -11,12 +11,18 @@ const getCurriculums = async (req, res) => {
 };
 
 const getCurriculumById = async (req, res) => {
-  const Curriculum = await Curriculum.findById(req.params.id);
-  if (!Curriculum) {
-    return res.status(404).json({ error: 'Curriculum not found' });
+  try {
+    const curriculum = await Curriculum.findById(req.params.id);
+    if (!curriculum) {
+      return res.status(404).json({ error: 'Curriculum not found' });
+    }
+    return res.json(curriculum);
+  } catch (error) {
+    console.error('Error in getCurriculumById:', error);
+    return res.status(500).json({ error: error.message });
   }
-  return res.json(Curriculum);
 };
+
 
 const createCurriculum = (req, res) => {
   const newCurriculum = new Curriculum({
@@ -58,38 +64,52 @@ const createCurriculum = (req, res) => {
 };
 
 const updateCurriculum = async (req, res) => {
-  const Curriculum = await Curriculum.findById(req.params.id);
-  if (!Curriculum) {
-    return res.status(404).json({ error: 'Curriculum not found' });
-  }
-  Curriculum.title = req.body.title;
-  Curriculum.totalPages = req.body.totalPages;
-  Curriculum.description = req.body.description;
-  Curriculum.updateAt = Date.now();
+  try {
+    const curriculum = await Curriculum.findById(req.params.id);
+    if (!curriculum) {
+      return res.status(404).json({ error: 'Curriculum not found' });
+    }
+    curriculum.name = req.body.name;
+    curriculum.lastname = req.body.lastname;
+    curriculum.jobTitle = req.body.jobTitle;
+    curriculum.email = req.body.email;
+    curriculum.description = req.body.description;
+    curriculum.phone = req.body.phone;
+    curriculum.linkedin = req.body.linkedin;
+    curriculum.github = req.body.github;
+    curriculum.skills = req.body.skills;
+    curriculum.languages = req.body.languages;
+    curriculum.technicalSkills = req.body.technicalSkills;
+    curriculum.experiences = req.body.experiences;
+    curriculum.educations = req.body.educations;
+    curriculum.areaOfInterests = req.body.areaOfInterests;
+    curriculum.updatedAt = Date.now();
 
-  Curriculum.save()
-    .then((Curriculum) => {
-      const status = (res.status = 200);
-      return res.send({ status, Curriculum });
-    })
-    .catch((err) => {
-      res.status = 400;
-      return res.send({ error: err.message });
-    });
+    console.log('Curriculum before save:', curriculum);
+    const updatedCurriculum = await curriculum.save();
+    console.log('Curriculum after save:', updatedCurriculum);
+
+    return res.status(200).json({ message: 'Curriculum updated', curriculum: updatedCurriculum });
+  
+  } catch (error) {
+    console.error('Error updating curriculum:', error);
+    return res.status(500).json({ error: error.message });
+  }
 };
 
 const deleteCurriculum = async (req, res) => {
-  const Curriculum = await Curriculum.findById(req.params.id);
-  if (!Curriculum) {
-    return res.status(404).json({ error: 'Curriculum not found' });
+  try {
+    const curriculum = await Curriculum.findById(req.params.id);
+    if (!curriculum) {
+      return res.status(404).json({ error: 'Curriculum not found' });
+    }
+    await curriculum.deleteOne();
+    return res.status(200).json({ message: 'Curriculum deleted successfully' });
+  
+  } catch (error) {
+    console.error('Error deleting curriculum:', error);
+    return res.status(400).json({ error: error.message });
   }
-  Curriculum.deleteOne()
-    .then(() => {
-      return res.status(200).json({ message: `Curriculum deleted` });
-    })
-    .catch((err) => {
-      return res.status(400).json({ error: err.message });
-    });
 };
 
 module.exports = {
