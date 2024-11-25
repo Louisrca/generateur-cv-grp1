@@ -102,6 +102,10 @@ const CurriculumSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  image: {
+    type: Schema.Types.ObjectId,
+    ref: 'Image',
+  }
 });
 
 const Curriculum = mongoose.model('curriculum', CurriculumSchema);
