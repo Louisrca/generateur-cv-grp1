@@ -55,7 +55,6 @@ exports.getRecommendationsByCVId = async (req, res) => {
 exports.deleteRecommendation = async (req, res) => {
   try {
     const recommandationId = req.params.id;
-    console.log(recommandationId);
     // Trouver la recommandation
     const recommandations =
       await RecommandationsModels.findById(recommandationId);
