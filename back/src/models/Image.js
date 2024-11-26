@@ -14,7 +14,7 @@ const imageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  cvId: {
+  curriculumId: {
     type: Schema.Types.ObjectId,
     ref: 'Curriculum',
   },

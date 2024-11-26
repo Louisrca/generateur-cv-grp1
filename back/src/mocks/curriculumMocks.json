@@ -1,6 +1,6 @@
 {
-  "name": "John",
-  "lastname": "Doe",
+  "name": "Johnnnn",
+  "lastname": "Doeeeee",
   "jobTitle": "Full Stack Developer",
   "email": "john.doe@example.com",
   "description": "Passionate developer with experience in modern web technologies.",
@@ -72,6 +72,7 @@
       "endYear": "2021-08-01"
     }
   ],
+  "isPublic": false,
   "areaOfInterests": [
     "Artificial Intelligence",
     "Cybersecurity",

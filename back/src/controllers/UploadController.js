@@ -1,11 +1,16 @@
 const Image = require('../models/Image');
-const { verifyImage } = require('../validator/ImageValidator');
 
 exports.uploadImage = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).send({
         error: 'Image not sent.',
+      });
+    }
+
+    if (!req.body.curriculumId) {
+      return res.status(400).send({
+        error: 'Curriculum ID not sent.',
       });
     }
 
@@ -21,20 +26,14 @@ exports.uploadImage = async (req, res) => {
         data: req.file.buffer,
         contentType: req.file.mimetype,
       },
+      curriculumId: req.body.curriculumId,
     });
+    const savedImage = await newImage.save();
 
-    const isNotValidImage = verifyImage(newImage);
-    if (isNotValidImage) {
-      const savedImage = await newImage.save();
-      res.status(200).send({
-        message: 'Image saved in MongoDB',
-        image: savedImage,
-      });
-    } else {
-      res.status(400).send({
-        error: isNotValidImage.message,
-      });
-    }
+    res.status(200).send({
+      message: 'Image saved in MongoDB',
+      image: savedImage,
+    });
   } catch (error) {
     res.status(500).send({
       error: 'Server error: ' + error.message,

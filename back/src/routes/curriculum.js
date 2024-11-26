@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const verifyToken = require('../middleware/jwt');
+const verifyToken = require('../middleware/jwt');
 
 const {
   getCurriculums,
@@ -10,14 +10,14 @@ const {
   deleteCurriculum,
 } = require('../controllers/CurriculumControllers');
 
-router.get('/', getCurriculums);
+router.get('/', verifyToken, getCurriculums);
 
-router.get('/:id', getCurriculumById);
+router.get('/:id', verifyToken, getCurriculumById);
 
-router.post('/', createCurriculum);
+router.post('/', verifyToken, createCurriculum);
 
-router.put('/:id', updateCurriculum);
+router.put('/:id', verifyToken, updateCurriculum);
 
-router.delete('/:id', deleteCurriculum);
+router.delete('/:id', verifyToken, deleteCurriculum);
 
 module.exports = router;
