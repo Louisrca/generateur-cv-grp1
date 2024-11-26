@@ -71,6 +71,7 @@ const login = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       message: error.message || 'some error occurred while logging user',
+      status : 500
     });
   }
 };

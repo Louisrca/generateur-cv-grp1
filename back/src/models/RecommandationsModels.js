@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RecommandationSchema = new mongoose.Schema({
+const RecommandationModels = new mongoose.Schema({
     message: {
         type: String,
         required: true
@@ -14,11 +14,11 @@ const RecommandationSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
-      curriculum: {
+      curriculumId: {
         type: Schema.Types.ObjectId,
         ref: 'Curriculum',
       }
 });
 
-const Recommandation = mongoose.model('Recommandation', RecommandationSchema);
+const Recommandation = mongoose.model('Recommandation', RecommandationModels);
 module.exports = Recommandation;
