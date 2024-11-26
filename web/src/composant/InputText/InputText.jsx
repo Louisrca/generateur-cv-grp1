@@ -1,19 +1,22 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./InputText.module.css";
+import TextField from "@mui/material/TextField";
 
-export const InputText = ({ label, placeholder, inputName, type = "text" }) => {
+export const InputText = ({ label, inputName, type = "text" }) => {
   const [value, setValue] = useState("");
   return (
     <>
       <div className={styles.inputTextContainer}>
-        <label htmlFor={inputName}>{label}</label>
-        <input
-          type={type}
+        <TextField
+          id="outlined-basic"
+          label={label}
           name={inputName}
-          value={value}
-          placeholder={placeholder}
           onChange={(e) => setValue(e.target.value)}
+          value={value}
+          type={type}
+          variant="outlined"
+          size="small"
         />
       </div>
     </>
@@ -22,7 +25,6 @@ export const InputText = ({ label, placeholder, inputName, type = "text" }) => {
 
 InputText.propsTypes = {
   label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
   inputName: PropTypes.string.isRequired,
   type: PropTypes.string,
 };

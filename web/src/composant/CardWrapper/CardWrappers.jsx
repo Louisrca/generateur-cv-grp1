@@ -1,8 +1,13 @@
-import styles from "./CardWrappers.module.css";
 import PropTypes from "prop-types";
+import Card from "@mui/material/Card";
+import { CardContent } from "@mui/material";
 
 export default function CardWrapper({ children }) {
-  return <div className={styles.cardWrapper}>{children}</div>;
+  return (
+    <Card>
+      <CardContent>{children}</CardContent>
+    </Card>
+  );
 }
 
 CardWrapper.propTypes = {

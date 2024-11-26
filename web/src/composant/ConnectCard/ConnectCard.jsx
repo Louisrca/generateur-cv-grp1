@@ -2,6 +2,9 @@ import { InputText } from "../InputText/InputText";
 import CardWrapper from "../CardWrapper/CardWrappers";
 import styles from "./ConnectCard.module.css";
 import { useRegisterUser } from "../../api/auth/register";
+import Divider from "@mui/material/Divider";
+import Link from "@mui/material/Link";
+
 export const ConnectCard = () => {
   const registerUser = useRegisterUser();
   const handleSubmit = (e) => {
@@ -11,9 +14,9 @@ export const ConnectCard = () => {
     registerUser.mutate(data);
   };
   return (
-    <>
+    <section className={styles.connectCardContainer}>
       <CardWrapper>
-        <h2>Connectez-vous</h2>
+        <h2>Welcome</h2>
         <form className={styles.formContainer} onSubmit={handleSubmit}>
           <InputText label="Prénom" inputName="name" />
           <InputText label="Nom" inputName="lastname" />
@@ -25,7 +28,11 @@ export const ConnectCard = () => {
           />
           <button type="submit">Se connecter</button>
         </form>
+        <div className={styles.redirectionContainer}>
+          <Divider variant="middle" />
+          <Link href="/login">Already have an account ?</Link>
+        </div>
       </CardWrapper>
-    </>
+    </section>
   );
 };
