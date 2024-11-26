@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+
 function App() {
   const queryClient = new QueryClient();
   return (
