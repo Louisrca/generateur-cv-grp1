@@ -22,7 +22,7 @@ export const ConnectCard = () => {
           <InputText label="Nom" inputName="lastname" />
           <InputText label="Email" inputName="email" type="email" />
           <InputText
-            label="Mot de passe"
+            label="Mot de passee"
             type="password"
             inputName="password"
           />
