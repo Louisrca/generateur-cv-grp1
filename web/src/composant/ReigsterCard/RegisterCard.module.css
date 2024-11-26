@@ -1,0 +1,20 @@
+.connectCardContainer {
+  width: 35rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.redirectionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}

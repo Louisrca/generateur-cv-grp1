@@ -23,7 +23,7 @@ export const InputText = ({ label, inputName, type = "text" }) => {
   );
 };
 
-InputText.propsTypes = {
+InputText.propTypes = {
   label: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
   type: PropTypes.string,
