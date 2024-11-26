@@ -98,14 +98,14 @@ const CurriculumSchema = Schema({
     type: Date,
     default: Date.now,
   },
+  isPublic: {
+    type: Boolean,
+    default: false,
+  },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  image: {
-    type: Schema.Types.ObjectId,
-    ref: 'Image',
-  }
 });
 
 const Curriculum = mongoose.model('curriculum', CurriculumSchema);

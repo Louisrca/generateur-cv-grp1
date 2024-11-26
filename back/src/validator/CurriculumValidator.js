@@ -66,7 +66,10 @@ module.exports = {
           minItems: 1,
           errorMessage: 'Invalid educations or missing educations',
         },
-
+        isPublic: {
+          type: 'boolean',
+          errorMessage: 'Invalid isPublic or missing isPublic',
+        },
         areaOfInterests: {
           type: 'array',
           minItems: 1,

@@ -23,44 +23,53 @@ const getCurriculumById = async (req, res) => {
   }
 };
 
-
 const createCurriculum = (req, res) => {
-  const newCurriculum = new Curriculum({
-    name: req.body.name,
-    lastname: req.body.lastname,
-    jobTitle: req.body.jobTitle,
-    email: req.body.email,
-    phone: req.body.phone,
-    linkedin: req.body.linkedin,
-    github: req.body.github,
-    skills: req.body.skills,
-    languages: req.body.languages,
-    technicalSkills: req.body.technicalSkills,
-    description: req.body.description,
-    educations: req.body.educations,
-    experiences: req.body.experiences,
-    areaOfInterests: req.body.areaOfInterests,
-    createAt: Date.now(),
-    updateAt: Date.now(),
-    author: req.user,
-  });
-
-  const isCurriculumValid = verifyCurriculum(req);
-
-  if (isCurriculumValid) {
-    return res.status(400).json({ error: verifyCurriculum(req, res) });
-  }
-
-  newCurriculum
-    .save()
-    .then((Curriculum) => {
-      const status = (res.status = 200);
-      return res.send({ status, Curriculum });
-    })
-    .catch((err) => {
-      res.status = 400;
-      return res.send({ error: err.message });
+  try {
+    // Vérifiez si l'utilisateur est authentifié
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ error: 'Unauthorized. Please log in.' });
+    }
+    const newCurriculum = new Curriculum({
+      name: req.body.name,
+      lastname: req.body.lastname,
+      jobTitle: req.body.jobTitle,
+      email: req.body.email,
+      phone: req.body.phone,
+      linkedin: req.body.linkedin,
+      github: req.body.github,
+      skills: req.body.skills,
+      languages: req.body.languages,
+      technicalSkills: req.body.technicalSkills,
+      description: req.body.description,
+      educations: req.body.educations,
+      experiences: req.body.experiences,
+      areaOfInterests: req.body.areaOfInterests,
+      createAt: Date.now(),
+      updateAt: Date.now(),
+      author: req.user,
     });
+    console.log(req.user);
+
+    const isCurriculumValid = verifyCurriculum(req);
+
+    if (isCurriculumValid) {
+      return res.status(400).json({ error: verifyCurriculum(req, res) });
+    }
+
+    newCurriculum
+      .save()
+      .then((Curriculum) => {
+        const status = (res.status = 200);
+        return res.send({ status, Curriculum });
+      })
+      .catch((err) => {
+        res.status = 400;
+        return res.send({ error: err.message });
+      });
+  } catch (error) {
+    console.error('Error in createCurriculum:', error);
+    return res.status(500).json({ error: error.message });
+  }
 };
 
 const updateCurriculum = async (req, res) => {
@@ -89,8 +98,9 @@ const updateCurriculum = async (req, res) => {
     const updatedCurriculum = await curriculum.save();
     console.log('Curriculum after save:', updatedCurriculum);
 
-    return res.status(200).json({ message: 'Curriculum updated', curriculum: updatedCurriculum });
-  
+    return res
+      .status(200)
+      .json({ message: 'Curriculum updated', curriculum: updatedCurriculum });
   } catch (error) {
     console.error('Error updating curriculum:', error);
     return res.status(500).json({ error: error.message });
@@ -105,7 +115,6 @@ const deleteCurriculum = async (req, res) => {
     }
     await curriculum.deleteOne();
     return res.status(200).json({ message: 'Curriculum deleted successfully' });
-  
   } catch (error) {
     console.error('Error deleting curriculum:', error);
     return res.status(400).json({ error: error.message });
