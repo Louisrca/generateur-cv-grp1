@@ -3,18 +3,18 @@ const RecommandationsModels = require('../models/RecommandationsModels');
 // Ajouter une recommandation
 exports.ajouterRecommandation = async (req, res) => {
     try {
-        const { message, curriculum } = req.body;
+        const { message, curriculumId } = req.body;
 
         // Vérification des champs requis
-        if (!message || !curriculum) {
+        if (!message || !curriculumId) {
             return res.status(400).json({ message: 'Le message et l\'ID du CV sont requis pour ajouter une recommandation.' });
         }
 
         // Création d'une nouvelle recommandation
         const nouvelleRecommandation = new RecommandationsModels({
             message,
-            curriculum,
-            author: req.user.id, // L'utilisateur connecté (via JWT)
+            curriculumId,
+            author: req.user
         });
 
         await nouvelleRecommandation.save();
@@ -30,7 +30,7 @@ exports.obtenirRecommandationsParCV = async (req, res) => {
         const curriculumId = req.params.curriculumId;
 
         // Récupération des recommandations associées à un CV
-        const recommandations = await RecommandationsModels.find({ curriculum: curriculumId })
+        const recommandations = await RecommandationsModels.find({ recommandation: curriculumId })
             .populate('author', 'name email') // Remplir les infos de l'auteur (nom et email)
             .sort({ creationAt: -1 }); // Trier par date décroissante
 
@@ -44,7 +44,7 @@ exports.obtenirRecommandationsParCV = async (req, res) => {
 exports.supprimerRecommandation = async (req, res) => {
     try {
         const recommandationId = req.params.id;
-
+console.log(recommandationId)
         // Trouver la recommandation
         const recommandations = await RecommandationsModels.findById(recommandationId);
 
@@ -53,9 +53,9 @@ exports.supprimerRecommandation = async (req, res) => {
         }
 
         // Vérifier que l'utilisateur connecté est l'auteur
-        if (recommandations.author.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Vous n\'êtes pas autorisé à supprimer cette recommandation.' });
-        }
+        // if (recommandations.author.toString() !== req.user.id) {
+        //     return res.status(403).json({ message: 'Vous n\'êtes pas autorisé à supprimer cette recommandation.' });
+        // }
 
         await recommandations.remove();
         res.status(200).json({ message: 'Recommandation supprimée avec succès.' });

@@ -14,7 +14,7 @@ const RecommandationModels = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
-      curriculum: {
+      curriculumId: {
         type: Schema.Types.ObjectId,
         ref: 'Curriculum',
       }
