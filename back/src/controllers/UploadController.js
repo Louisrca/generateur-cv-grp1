@@ -14,6 +14,13 @@ exports.uploadImage = async (req, res) => {
       });
     }
 
+    const image = await Image.findOne({ curriculumId: req.body.curriculumId });
+    if (image) {
+      return res.status(400).send({
+        error: 'Image already exists for this curriculum.',
+      });
+    }
+
     const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (!allowedMimeTypes.includes(req.file.mimetype)) {
       return res.status(400).send({
