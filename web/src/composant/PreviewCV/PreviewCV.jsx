@@ -2,12 +2,12 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useGetCurriculums } from "../../api/curriculum/curriculum";
 
+
 function PreviewCV() {
   const { data: curriculums } = useGetCurriculums();
 
   return (
-    <div className="d-flex flex-wrap justify-content-around">
-      
+    <div className="d-flex flex-wrap justify-content-start">
       {curriculums &&
         curriculums.map((cv) => (
           <Card
