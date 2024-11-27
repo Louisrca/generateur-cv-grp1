@@ -5,25 +5,24 @@ import CardWrapper from "../CardWrapper/CardWrappers";
 import { useRegisterUser } from "../../api/auth/register";
 
 const languageOptions = [
-    "Anglais",
-    "Français",
-    "Espagnol",
-    "Allemand",
-    "Chinois",
-    "Italien",
-    "Japonais",
-    "Arabe",
-    "Russe",
-    "Portugais",
-  ];
-  
+  "Anglais",
+  "Français",
+  "Espagnol",
+  "Allemand",
+  "Chinois",
+  "Italien",
+  "Japonais",
+  "Arabe",
+  "Russe",
+  "Portugais",
+];
 
 export const CreateCard = () => {
   const registerUser = useRegisterUser();
 
   const [skills, setSkills] = useState([""]);
   const [languages, setLanguages] = useState([{ name: "", level: "" }]);
-  const [interestcenter, setInterestCenter] = useState([""]);
+  const [areaOfInterests, setAreaOfInterests] = useState([""]);
   const [educations, setEducations] = useState([
     {
       school: "",
@@ -35,11 +34,11 @@ export const CreateCard = () => {
   ]);
   const [exppro, setExppro] = useState([
     {
-        job: "",
-        company: "",
-        startYear: "",
-        endYear: "",
-        description: ""
+      job: "",
+      company: "",
+      startYear: "",
+      endYear: "",
+      description: ""
     }
   ]);
 
@@ -54,23 +53,23 @@ export const CreateCard = () => {
     data.areaOfInterests = data.areaOfInterests 
       ? data.areaOfInterests.split(",")
       : [];
-      data.educations = educations.filter(
-        (edu) =>
-          edu.school.trim() !== "" &&
-          edu.degree.trim() !== "" &&
-          edu.startYear.trim() !== "" &&
-          edu.endYear.trim() !== ""
-      );
-      data.exppro = exppro.filter(
-        (exp) =>
-          exp.job.trim() !== "" &&
-          exp.company.trim() !== "" &&
-          exp.startYear.trim() !== "" &&
-          exp.endYear.trim() !== "" &&
-          exp.description.trim() !== ""
-      );
-      registerUser.mutate(data);
-  };
+    data.educations = educations.filter(
+      (edu) =>
+        edu.school.trim() !== "" &&
+        edu.degree.trim() !== "" &&
+        edu.startYear.trim() !== "" &&
+        edu.endYear.trim() !== ""
+    );
+    data.exppro = exppro.filter(
+      (exp) =>
+        exp.job.trim() !== "" &&
+        exp.company.trim() !== "" &&
+        exp.startYear.trim() !== "" &&
+        exp.endYear.trim() !== "" &&
+        exp.description.trim() !== ""
+    );
+    registerUser.mutate(data);
+};
 
   const addSkill = () => setSkills([...skills, ""]);
 
@@ -95,24 +94,24 @@ export const CreateCard = () => {
   const removeLanguage = (index) =>
     setLanguages(languages.filter((_, i) => i !== index));
 
-  const addInterestCenter = () => setInterestCenter([...interestcenter, ""]);
+  const addAreaOfInterests = () => setAreaOfInterests([...areaOfInterests, ""]);
 
-  const updateInterestCenter = (index, value) => {
-    const updatedInterestCenter = [...interestcenter];
-    updatedInterestCenter[index] = value;
-    setSkills(updateInterestCenter);
+  const updateAreaOfInterests = (index, value) => {
+    const updatedAreaOfInterests = [...areaOfInterests];
+    updatedAreaOfInterests[index] = value;
+    setAreaOfInterests(updatedAreaOfInterests);
   };
 
-  const removeInterestCenter = (index) =>
-    setInterestCenter(interestcenter.filter((_, i) => i !== index));
-  
+  const removeAreaOfInterests = (index) =>
+    setAreaOfInterests(areaOfInterests.filter((_, i) => i !== index));
+
   const addEducation = () => {
     setEducations([
       ...educations,
       { school: "", degree: "", fieldOfStudy: "", startYear: "", endYear: "" }
     ]);
   };
-  
+
   const updateEducation = (index, field, value) => {
     const updatedEducations = [...educations];
     updatedEducations[index][field] = value;
@@ -125,43 +124,92 @@ export const CreateCard = () => {
   const addExppro = () => {
     setExppro([
       ...exppro,
-      { job: "", company: "", startYear: "", endYear: "", desciprtion: "" }
+      { job: "", company: "", startYear: "", endYear: "", description: "" }
     ]);
   };
-  
+
   const updateExppro = (index, field, value) => {
     const updatedExppro = [...exppro];
     updatedExppro[index][field] = value;
-    setExppro(updateExppro);
+    setExppro(updatedExppro);
   };
 
   const removeExppro = (index) =>
     setExppro(exppro.filter((_, i) => i !== index));
 
+  const updateInfoperso = (index, field, value) => {
+    const updatedInfoperso = [...infoperso];
+    updatedInfoperso[index][field] = value;
+    setExppro(updatedInfoperso);
+  };
 
   return (
     <section className={styles.createCardContainer}>
       <CardWrapper>
         <h2>Créé ton CV</h2>
-        <h2>Ajout d'image</h2>
         <form className={styles.formContainer} onSubmit={handleSubmit}>
           {/* Informations personnelles */}
           <h3>Informations personnelles</h3>
-          <InputText label="Nom" inputName="lastname" required/>
-          <InputText label="Prénom" inputName="name" required/>
-          <InputText label="Titre du poste" inputName="jobTitle" required/>
-          <InputText label="Email" inputName="email" required/>
-          <InputText label="Téléphone" inputName="phone" required/>
-          <InputText label="LinkedIn" inputName="linkedin" />
-          <InputText label="GitHub" inputName="github" />
-          <InputText label="Description" inputName="description" multiline required/>
+          {exppro.map((infoperso, index) => (
+          <div key={index} className={styles.infopersoRow}>
+            <InputText
+                label="Nom"
+                inputName={`lastame-${index}`}
+                value={infoperso.name}
+                onChange={(e) => updateInfoperso(index, "lastname", e.target.value)}
+              />
+            <InputText
+                label="Prénom"
+                inputName={`name-${index}`}
+                value={infoperso.name}
+                onChange={(e) => updateInfoperso(index, "name", e.target.value)}
+            />
+            <InputText
+                label="Titre du poste"
+                inputName={`jobTitle-${index}`}
+                value={infoperso.jobTitle}
+                onChange={(e) => updateInfoperso(index, "jobTitle", e.target.value)}
+            />
+            <InputText
+                label="Email"
+                inputName={`email-${index}`}
+                value={infoperso.email}
+                onChange={(e) => updateInfoperso(index, "email", e.target.value)}
+            />
+            <InputText
+                label="Téléphone"
+                inputName={`phone-${index}`}
+                value={infoperso.phone}
+                onChange={(e) => updateInfoperso(index, "phone", e.target.value)}
+            />
+            <InputText
+                label="LinkedIn"
+                inputName={`linkedin-${index}`}
+                value={infoperso.linkedin}
+                onChange={(e) => updateInfoperso(index, "linkedin", e.target.value)}
+            />
+            <InputText
+                label="GitHub"
+                inputName={`github-${index}`}
+                value={infoperso.github}
+                onChange={(e) => updateInfoperso(index, "github", e.target.value)}
+            />
+            <InputText
+                label="Description"
+                inputName={`description-${index}`}
+                value={infoperso.description}
+                onChange={(e) => updateInfoperso(index, "description", e.target.value)}
+                multiline
+            />
+          </div>
+          ))}
 
-                    {/* Compétences */}
-                    <h3>Skills</h3>
+          {/* Compétences */}
+          <h3>Compétences</h3>
           {skills.map((skill, index) => (
             <div key={index} className={styles.skillRow}>
               <InputText
-                label={`Skill`}
+                label={`Compétence`}
                 inputName={`skill-${index}`}
                 value={skill}
                 onChange={(e) => updateSkill(index, e.target.value)}
@@ -179,15 +227,13 @@ export const CreateCard = () => {
             + Ajouter une compétence
           </button>
 
-         {/* Langues */}
-         <h3>Langues</h3>
+          {/* Langues */}
+          <h3>Langues</h3>
           {languages.map((lang, index) => (
             <div key={index} className={styles.languageRow}>
               <select
                 value={lang.name}
-                onChange={(e) =>
-                  updateLanguage(index, "name", e.target.value)
-                }
+                onChange={(e) => updateLanguage(index, "name", e.target.value)}
                 required
               >
                 <option value="">Sélectionnez une langue</option>
@@ -199,9 +245,7 @@ export const CreateCard = () => {
               </select>
               <select
                 value={lang.level}
-                onChange={(e) =>
-                  updateLanguage(index, "level", e.target.value)
-                }
+                onChange={(e) => updateLanguage(index, "level", e.target.value)}
                 required
               >
                 <option value="Scolaire">Scolaire</option>
@@ -226,40 +270,40 @@ export const CreateCard = () => {
             + Ajouter une langue
           </button>
 
-          {/* Expériences */}
-        <h3>Expériences professionelles</h3>
-          {exppro.map((exppro, index) => (
+          {/* Expériences professionnelles */}
+          <h3>Expériences professionnelles</h3>
+          {exppro.map((exp, index) => (
             <div key={index} className={styles.expproRow}>
               <InputText
                 label="Métier"
-                inputName={`job`}
-                value={exppro.job}
+                inputName={`job-${index}`}
+                value={exp.job}
                 onChange={(e) => updateExppro(index, "job", e.target.value)}
               />
               <InputText
                 label="Entreprise"
-                inputName={`company`}
-                value={exppro.company}
+                inputName={`company-${index}`}
+                value={exp.company}
                 onChange={(e) => updateExppro(index, "company", e.target.value)}
               />
               <InputText
                 label="Date de début"
                 inputName={`startYear-${index}`}
                 type="date"
-                value={exppro.startYear}
+                value={exp.startYear}
                 onChange={(e) => updateExppro(index, "startYear", e.target.value)}
               />
               <InputText
                 label="Date de fin"
                 inputName={`endYear-${index}`}
                 type="date"
-                value={exppro.endYear}
+                value={exp.endYear}
                 onChange={(e) => updateExppro(index, "endYear", e.target.value)}
               />
               <InputText
                 label="Description"
-                inputName={`description`}
-                value={exppro.description}
+                inputName={`description-${index}`}
+                value={exp.description}
                 onChange={(e) => updateExppro(index, "description", e.target.value)}
               />
               <button
@@ -275,40 +319,40 @@ export const CreateCard = () => {
             + Ajouter une expérience
           </button>
 
-            {/* Éducation */}
-            <h3>Éducations</h3>
-          {educations.map((education, index) => (
+          {/* Éducation */}
+          <h3>Éducation</h3>
+          {educations.map((edu, index) => (
             <div key={index} className={styles.educationRow}>
               <InputText
-                label="Nom de l'école"
+                label="École"
                 inputName={`school-${index}`}
-                value={education.school}
+                value={edu.school}
                 onChange={(e) => updateEducation(index, "school", e.target.value)}
               />
               <InputText
                 label="Diplôme"
                 inputName={`degree-${index}`}
-                value={education.degree}
+                value={edu.degree}
                 onChange={(e) => updateEducation(index, "degree", e.target.value)}
               />
               <InputText
                 label="Domaine d'étude"
                 inputName={`fieldOfStudy-${index}`}
-                value={education.fieldOfStudy}
+                value={edu.fieldOfStudy}
                 onChange={(e) => updateEducation(index, "fieldOfStudy", e.target.value)}
               />
               <InputText
                 label="Date de début"
                 inputName={`startYear-${index}`}
                 type="date"
-                value={education.startYear}
+                value={edu.startYear}
                 onChange={(e) => updateEducation(index, "startYear", e.target.value)}
               />
               <InputText
                 label="Date de fin"
                 inputName={`endYear-${index}`}
                 type="date"
-                value={education.endYear}
+                value={edu.endYear}
                 onChange={(e) => updateEducation(index, "endYear", e.target.value)}
               />
               <button
@@ -321,30 +365,29 @@ export const CreateCard = () => {
             </div>
           ))}
           <button type="button" onClick={addEducation} className={styles.addButton}>
-            + Ajouter une école
+            + Ajouter une éducation
           </button>
-
 
           {/* Centres d'intérêt */}
           <h3>Centres d'intérêt</h3>
-          {interestcenter.map((interestcenter, index) => (
-            <div key={index} className={styles.interestcenterRow}>
+          {areaOfInterests.map((areaOfInterests, index) => (
+            <div key={index} className={styles.areaOfInterestsRow}>
               <InputText
-                label={`Centre d'intérêt`}
-                inputName={`InterestCenter-${index}`}
-                value={interestcenter}
-                onChange={(e) => updateInterestCenter(index, e.target.value)}
+                label="Centre d'intérêt"
+                inputName="areaOfInterests"
+                value={areaOfInterests}
+                onChange={(e) => updateAreaOfInterests(index, e.target.value)}
               />
               <button
                 type="button"
-                onClick={() => removeInterestCenter(index)}
+                onClick={() => removeAreaOfInterests(index)}
                 className={styles.removeButton}
               >
                 -
               </button>
             </div>
           ))}
-          <button type="button" onClick={addInterestCenter} className={styles.addButton}>
+          <button type="button" onClick={addAreaOfInterests} className={styles.addButton}>
             + Ajouter un centre d'intérêt
           </button>
 
@@ -355,11 +398,12 @@ export const CreateCard = () => {
               <input type="checkbox" name="isPublic" /> Rendre ce CV public
             </label>
           </div>
+
           {/* Bouton de soumission */}
           <button type="submit" className={styles.submitButton}>
             Soumettre le CV
           </button>
-        </form>
+          </form>
       </CardWrapper>
     </section>
   );
