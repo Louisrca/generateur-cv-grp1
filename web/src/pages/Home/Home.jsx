@@ -1,7 +1,12 @@
+import React from "react";
+import NavBar from "../../composant/NavBar/NavBar";
+import PreviewCV from "../../composant/PreviewCV/PreviewCV";
+
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to the Home page!</h1>
+      <NavBar />
+      <PreviewCV />
     </div>
   );
-}
+};
