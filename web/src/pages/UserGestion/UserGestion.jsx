@@ -1,15 +1,15 @@
-import { useGetUserById } from "../../api/user/user";
 import NavBar from "../../composant/NavBar/NavBar";
-import useAuth from "../../hooks/useAuth";
+import UserButton from "../../composant/UserButton/UserButton"; 
+import UserForm from "../../composant/UserForm/UserForm";
 
-export default function UserGestion(){
-    const user=useAuth();
-    const {data: userInformation} = useGetUserById(user.user.id)
-   
+export default function UserGestion(){   
     return(
         <div>
             <NavBar/>
-            Bonjour {userInformation.name}
+            <div className="container">
+                <UserForm/>
+                <UserButton/>
+            </div>
         </div>
     )
 }
