@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthProvider";
+import UserGestion from "./pages/UserGestion/UserGestion";
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,10 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
+          <Route path="/profile" element={<ProtectedRoute>
+            <UserGestion/>
+          </ProtectedRoute>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/curriculum/:cvId" element={<Curriculum />} />  
