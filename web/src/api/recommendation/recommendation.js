@@ -9,14 +9,17 @@ export const useGetRecommentation = (cvId) => {
         body: null,
         method: "GET",
       }),
+    refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 };
 
 export const useCreateRecommendation = () => {
-  return useMutation((recommendation) =>
-    webApiCall("/recommendations", {
-      body: recommendation,
-      method: "POST",
-    })
-  );
+  return useMutation({
+    mutationFn: (data) =>
+      webApiCall("/recommendations", {
+        body: JSON.stringify(data),
+        method: "POST",
+      }),
+  });
 };

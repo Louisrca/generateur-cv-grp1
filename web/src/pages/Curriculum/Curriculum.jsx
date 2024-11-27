@@ -8,7 +8,7 @@ export default function Curriculum() {
   return (
     <div>
       Curriculum {cvId}
-      <AddRecommendation cvId={cvId} />
+      <AddRecommendation />
     </div>
   );
 }
