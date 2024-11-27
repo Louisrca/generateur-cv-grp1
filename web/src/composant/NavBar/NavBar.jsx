@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -16,9 +17,8 @@ function NavBar() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Menu</Nav.Link>
-            <Nav.Link href="#action2">Curriculum</Nav.Link>
-            <Nav.Link href="#action2">Mes CV</Nav.Link>
+            <Nav.Link as={NavLink} to="/" activeclassname="active">Menu</Nav.Link>
+            <Nav.Link as={NavLink} to="/curriculum" activeclassname="active">Mes CV</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
