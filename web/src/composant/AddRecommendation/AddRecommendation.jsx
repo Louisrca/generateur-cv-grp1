@@ -26,7 +26,21 @@ export default function AddRecommendation() {
       Commentaires :
       <ul>
         {recommendation &&
-          recommendation?.map((rec) => <li key={rec.id}>{rec.message}</li>)}
+          recommendation?.map((rec) => (
+            <>
+              <li key={rec.id}>{rec.message}</li>{" "}
+              <span
+                style={{
+                  textDecoration: "italic",
+                  color: "grey",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                }}
+              >
+                from : {rec.author.name}
+              </span>
+            </>
+          ))}
       </ul>
       <form onSubmit={handleSubmit}>
         <input
@@ -34,7 +48,7 @@ export default function AddRecommendation() {
           name="message"
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button type="submit">Add </button>
+        <button type="submit">publier </button>
       </form>
     </div>
   );
