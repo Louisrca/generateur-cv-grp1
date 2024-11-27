@@ -11,3 +11,18 @@ export const useGetUserById = (userId) => {
       }),
   });
 };
+
+export const userUpdateById = (userId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (data) =>
+        webApiCall(`/users/update/${userId}`, {
+          body: JSON.stringify(data),
+          method: "PUT",
+        }),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["user"]);
+      },
+    });
+  };
+  
