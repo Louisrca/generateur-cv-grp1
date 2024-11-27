@@ -1,5 +1,6 @@
 import { useGetUserById } from "../../api/user/user";
 import useAuth from "../../hooks/useAuth";
+import Button from "react-bootstrap/Button";
 
 function UserForm() {
     const user=useAuth();
@@ -22,6 +23,12 @@ function UserForm() {
                     <p>{userInformation?.email}</p>
                 </div>
             </div>
+            <Button variant="outline-dark" onClick={() => navigate(`/`)}>
+                Gérer mes recommendations
+            </Button>
+            <Button variant="outline-dark" onClick={() => navigate(`/`)}>
+                Editer mon profil
+            </Button>
         </div>
     )
 }

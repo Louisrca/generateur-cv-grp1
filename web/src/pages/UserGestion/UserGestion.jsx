@@ -8,7 +8,6 @@ export default function UserGestion(){
             <NavBar/>
             <div className="container">
                 <UserForm/>
-                <UserButton/>
             </div>
         </div>
     )

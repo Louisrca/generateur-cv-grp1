@@ -12,7 +12,7 @@ export const useGetUserById = (userId) => {
   });
 };
 
-export const userUpdateById = (userId) => {
+export const useUpdateById = (userId) => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: (data) =>
