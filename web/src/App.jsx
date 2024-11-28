@@ -25,10 +25,15 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
-          <Route path="/profile" element={<ProtectedRoute>
-            <UserGestion/>
-          </ProtectedRoute>} />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <UserGestion />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/curriculum/:cvId" element={<Curriculum />} />

@@ -27,7 +27,7 @@ function NavBar() {
             <Nav.Link as={NavLink} to="/createcv" activeclassname="active">
               Mes CV
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/curriculum" activeclassname="active">
+            <Nav.Link as={NavLink} to="/profile" activeclassname="active">
               Mon espace
             </Nav.Link>
 
