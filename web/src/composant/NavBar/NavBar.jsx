@@ -4,12 +4,15 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 function NavBar() {
+  const { logout } = useAuth();
+
   return (
     <Navbar expand="lg" className="bg-dark navbar-dark">
       <Container fluid>
-        <Navbar.Brand href="#">SimplyCV</Navbar.Brand>
+        <Navbar.Brand href="/">SimplyCV</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -37,6 +40,10 @@ function NavBar() {
             />
             <Button variant="outline-light">Rechercher</Button>
           </Form>
+          <Button variant="danger" className="ms-2" onClick={logout}>
+            {" "}
+            logout
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
