@@ -1,12 +1,23 @@
 import styles from "./CurriculumView.module.css";
-
+import { useDeleteCurriculum } from "../../api/curriculum/curriculum";
 import PropTypes from "prop-types";
 
 export const CurriculumView = ({ userCurriculum }) => {
-  console.log(userCurriculum);
+  const { mutate: deleteCurriculum } = useDeleteCurriculum();
+
+  const handleDelete = (cvId) => {
+    if (window.confirm("Veux-tu vraiment supprimer le CV ?")) {
+      deleteCurriculum(cvId);
+    }
+  };
+
   return (
     <>
       {userCurriculum.map((curriculum) => (
+        <div key={curriculum._id}>
+
+          <button onClick={()=>handleDelete(curriculum._id)}>Delete</button>
+   
         <div key={curriculum._id} className={styles.container}>
           <div className="sidebar">
             <h2>
@@ -87,6 +98,7 @@ export const CurriculumView = ({ userCurriculum }) => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       ))}
     </>
