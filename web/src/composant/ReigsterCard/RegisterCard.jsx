@@ -33,7 +33,7 @@ export const RegisterCard = () => {
         </form>
         <div className={styles.redirectionContainer}>
           <Divider variant="middle" />
-          <Link href="/login">Pas encore de compte ?</Link>
+          <Link href="/login">Déjà parmis nous ?</Link>
         </div>
       </CardWrapper>
     </section>
