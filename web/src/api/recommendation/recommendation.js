@@ -1,7 +1,7 @@
 import { webApiCall } from "../utils/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetRecommentation = (cvId) => {
+export const useGetRecommendation = (cvId) => {
   return useQuery({
     queryKey: ["recommendations"],
     queryFn: () =>
@@ -30,8 +30,8 @@ export const useCreateRecommendation = () => {
 export const useDeleteRecommendation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (cvId) =>
-      webApiCall(`/recommendations/${cvId}`, {
+    mutationFn: (recommendationId) =>
+      webApiCall(`/recommendations/${recommendationId}`, {
         body: null,
         method: "DELETE",
       }),

@@ -1,4 +1,4 @@
-import DeleteRecommendations from "../../composant/DeleteRecommendation/DeleteRecommendation";
+import ConnectedUserRecommendations from "../../composant/DeleteRecommendation/DeleteRecommendation";
 import NavBar from "../../composant/NavBar/NavBar";
 import styles from "./UserRecommendation.module.css"
 export default function UserRecommendation() {
@@ -6,7 +6,7 @@ export default function UserRecommendation() {
     <div>
       <NavBar />
       <div className={styles.container}>
-        <DeleteRecommendations/>
+        <ConnectedUserRecommendations/>
       </div>
     </div>
   );
