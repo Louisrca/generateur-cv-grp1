@@ -20,6 +20,9 @@ export const useGetCurriculumByUserId = (userId) => {
         body: null,
         method: "GET",
       }),
+    onError: (error) => {
+      console.error("Error fetching curriculum", error);
+    },
   });
 };
 
@@ -28,6 +31,15 @@ export const usePostCurriculum = () => {
     webApiCall("/curriculum", {
       body: JSON.stringify(data),
       method: "POST",
+    })
+  );
+};
+
+export const useDeleteCurriculum = (cvId) => {
+  return useMutation(() =>
+    webApiCall(`/curriculum/${cvId}`, {
+      body: null,
+      method: "DELETE",
     })
   );
 };
