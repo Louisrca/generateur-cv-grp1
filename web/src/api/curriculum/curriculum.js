@@ -12,9 +12,20 @@ export const useGetCurriculums = () => {
   });
 };
 
+export const useGetCurriculumById = (cvId) => {
+  return useQuery({
+    queryKey: ["curriculumById", cvId],
+    queryFn: () =>
+      webApiCall(`/curriculum/single-curriculum/${cvId}`, {
+        body: null,
+        method: "GET",
+      }),
+  });
+};
+
 export const useGetCurriculumByUserId = (userId) => {
   return useQuery({
-    queryKey: ["curriculum", userId],
+    queryKey: ["curriculumByAuthor", userId],
     queryFn: () =>
       webApiCall(`/curriculum/${userId}`, {
         body: null,
@@ -31,6 +42,14 @@ export const usePostCurriculum = () => {
     webApiCall("/curriculum", {
       body: JSON.stringify(data),
       method: "POST",
+    })
+  );
+};
+export const useUpdateCurriculum = (userId) => {
+  return useMutation((data) =>
+    webApiCall(`/curriculum/${userId}`, {
+      body: JSON.stringify(data),
+      method: "PUT",
     })
   );
 };

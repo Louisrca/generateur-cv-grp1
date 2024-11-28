@@ -11,6 +11,18 @@ const getCurriculums = async (req, res) => {
   }
 };
 
+const getCurriculumById = async (req, res) => {
+  try {
+    const curriculum = await Curriculum.findById(req.params.id);
+    if (!curriculum) {
+      return res.status(404).json({ error: 'Curriculum not found' });
+    }
+    return res.status(200).json(curriculum);
+  } catch (error) {
+    return res.status(500).json({ error: `Internal server error : ${error}` });
+  }
+};
+
 const getCurriculumByAuthor = async (req, res) => {
   try {
     const authorId = req.params.id;
@@ -21,7 +33,9 @@ const getCurriculumByAuthor = async (req, res) => {
     }
 
     // Trouver le(s) curriculum(s) par auteur
-    const curriculums = await Curriculum.find({ author: authorId }).populate('author');
+    const curriculums = await Curriculum.find({ author: authorId }).populate(
+      'author'
+    );
 
     if (!curriculums || curriculums.length === 0) {
       return res
@@ -141,4 +155,5 @@ module.exports = {
   createCurriculum,
   updateCurriculum,
   deleteCurriculum,
+  getCurriculumById,
 };
