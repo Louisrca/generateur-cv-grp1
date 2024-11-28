@@ -42,7 +42,7 @@ export const useDeleteRecommendation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (recommendationId) =>
-      webApiCall(`/recommendations/${recommendationId}`, {
+      webApiCall(`/recommendations/delete/${recommendationId}`, {
         body: null,
         method: "DELETE",
       }),
