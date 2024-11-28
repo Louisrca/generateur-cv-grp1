@@ -1,0 +1,147 @@
+.createCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.cardWrapper {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Titre principal */
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Formulaire */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Sections */
+h3 {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Étiquettes */
+label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Boutons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.addButton,
+.removeButton {
+  background-color: #000000;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+.addButton:hover,
+.removeButton:hover {
+  background-color: #000000;
+}
+
+/* Flexbox pour la gestion des compétences, langues, etc. */
+.skillRow,
+.languageRow,
+.expproRow,
+.educationRow,
+.infopersoRow,
+.areaOfInterestsRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.skillRow input,
+.languageRow select,
+.expproRow input,
+.infopersoRow input,
+.educationRow input,
+.areaOfInterestsRow input {
+  flex-grow: 1;
+}
+
+.removeButton {
+  background-color: #b80000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background-color: #d40505;
+}
+
+/* Paramètres de visibilité */
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.submitButton {
+  background-color: #000000;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.submitButton:hover {
+  background-color: #108330;
+}

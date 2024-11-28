@@ -11,3 +11,11 @@ export const useGetCurriculums = () => {
       }),
   });
 };
+export const usePostCurriculum = () => {
+  return useMutation((data) =>
+    webApiCall("/curriculum", {
+      body: JSON.stringify(data),
+      method: "POST",
+    })
+  );
+};

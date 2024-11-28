@@ -1,5 +1,6 @@
 const Curriculum = require('../models/CurriculumModel');
 const { verifyCurriculum } = require('../validator/CurriculumValidator');
+const mongoose = require('mongoose');
 
 const getCurriculums = async (req, res) => {
   try {
@@ -10,16 +11,29 @@ const getCurriculums = async (req, res) => {
   }
 };
 
-const getCurriculumById = async (req, res) => {
+const getCurriculumByAuthor = async (req, res) => {
   try {
-    const curriculum = await Curriculum.findById(req.params.id);
-    if (!curriculum) {
-      return res.status(404).json({ error: 'Curriculum not found' });
+    const authorId = req.params.id;
+
+    // Vérifier si l'ID est valide
+    if (!mongoose.Types.ObjectId.isValid(authorId)) {
+      return res.status(400).json({ error: 'Invalid Author ID' });
     }
-    return res.json(curriculum);
+
+    // Trouver le(s) curriculum(s) par auteur
+    const curriculums = await Curriculum.find({ author: authorId }).populate('author');
+
+    if (!curriculums || curriculums.length === 0) {
+      return res
+        .status(404)
+        .json({ error: 'No curriculums found for this author' });
+    }
+
+    // Retourner le résultat
+    return res.status(200).json(curriculums);
   } catch (error) {
-    console.error('Error in getCurriculumById:', error);
-    return res.status(500).json({ error: error.message });
+    console.error('Error in getCurriculumByAuthor:', error.message);
+    return res.status(500).json({ error: 'An internal server error occurred' });
   }
 };
 
@@ -123,7 +137,7 @@ const deleteCurriculum = async (req, res) => {
 
 module.exports = {
   getCurriculums,
-  getCurriculumById,
+  getCurriculumByAuthor,
   createCurriculum,
   updateCurriculum,
   deleteCurriculum,

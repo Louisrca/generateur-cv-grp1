@@ -7,6 +7,7 @@ import Link from "@mui/material/Link";
 
 export const RegisterCard = () => {
   const registerUser = useRegisterUser();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
