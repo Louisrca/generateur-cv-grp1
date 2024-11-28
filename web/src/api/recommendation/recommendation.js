@@ -26,3 +26,20 @@ export const useCreateRecommendation = () => {
     },
   });
 };
+
+export const useDeleteRecommendation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (cvId) =>
+      webApiCall(`/recommendations/${cvId}`, {
+        body: null,
+        method: "DELETE",
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["recommendations"]);
+    },
+    onError: (error) => {
+      console.error("Erreur lors de la suppression :", error);
+    },
+  });
+};

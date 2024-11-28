@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import styles from "./UserForm.module.css";
+import { Link } from "react-router-dom"; // Import Link
+
 
 function UserForm() {
   const [isEditing, setIsEditing] = useState(false);
@@ -70,8 +72,9 @@ function UserForm() {
           {isEditing ? "Annuler" : "Editer"}
         </Button>
       </div>
-      <Button variant="outline-dark">Gérer mes recommendations</Button>
-      <Button variant="outline-dark">Editer mon profil</Button>
+      <Link to="/profile/recommendation">
+        <Button variant="outline-dark">Gérer mes recommendations</Button>
+      </Link>    
     </div>
   );
 }
