@@ -1,4 +1,5 @@
 const RecommandationsModels = require('../models/RecommandationsModels');
+const CurriculumModels = require('../models/CurriculumModels');
 
 // Ajouter une recommandation
 exports.createRecommendation = async (req, res) => {
@@ -31,10 +32,19 @@ exports.createRecommendation = async (req, res) => {
 };
 
 // Récupérer toutes les recommandations
-exports.getAllRecommendations = async (req, res) => {
+exports.getAllRecommendationsOfUser = async (req, res) => {
   try {
-    // Récupération de toutes les recommandations
-    const recommandations = await RecommandationsModels.find();
+    const userId = req.params.userId;
+
+    // Étape 1 : Récupérer tous les curriculums de l'utilisateur
+    const curriculums = await CurriculumModels.find({ userId }).select('_id');
+    const curriculumIds = curriculums.map((curriculum) => curriculum._id);
+
+    // Étape 2 : Récupérer toutes les recommandations associées aux curriculums de l'utilisateur
+    const recommandations = await RecommandationsModels.find({
+      curriculumId: { $in: curriculumIds },
+    }).populate('author', 'name email'); // Populate pour inclure les informations de l'auteur
+
     res.status(200).json(recommandations);
   } catch (error) {
     res.status(500).json({

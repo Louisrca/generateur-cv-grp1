@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   createRecommendation,
   getRecommendationsByCVId,
-  getAllRecommendations,
+  getAllRecommendationsOfUser,
   deleteRecommendation,
 } = require('../controllers/RecommandationController');
 const verifyToken = require('../middleware/jwt');
@@ -14,7 +14,7 @@ router.post('/', verifyToken, createRecommendation);
 // Obtenir toutes les recommandations pour un CV donné
 router.get('/:curriculumId', verifyToken, getRecommendationsByCVId);
 
-router.get('/', verifyToken, getAllRecommendations);
+router.get('/', verifyToken, getAllRecommendationsOfUser);
 
 // Supprimer une recommandation
 router.delete('/:id', verifyToken, deleteRecommendation);
