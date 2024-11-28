@@ -1,21 +1,23 @@
 import styles from "./CurriculumView.module.css";
-// import { useDeleteCurriculum } from "../../api/curriculum/curriculum";
+import { v4 as uuidv4 } from "uuid";
+import { Button } from "react-bootstrap";
 
 import PropTypes from "prop-types";
 
 export const CurriculumView = ({ userCurriculum }) => {
-  //   const deleteCurriculum = useDeleteCurriculum();
+  console.log("🚀 ~ CurriculumView ~ userCurriculum:", userCurriculum);
+
   const curriculumData = Array.isArray(userCurriculum)
     ? userCurriculum
     : [userCurriculum];
   return (
     <>
       {curriculumData?.map((curriculum) => (
-        <div key={curriculum?._id}>
-          <h1>Curriculum</h1>
-          {/* <button onClick={deleteCurriculum(curriculum._id)}>DELETE</button> */}
-          <div key={curriculum?._id} className={styles.container}>
-            <div className="sidebar">
+        <div key={curriculum?._id} className={styles.mainContainer}>
+          <Button href={"edit-cv/" + curriculum?._id}> Editer</Button>
+
+          <div key={uuidv4()} className={styles.container}>
+            <div className={styles.sidebar}>
               <h2>
                 {curriculum?.name} {curriculum?.lastname}
               </h2>
@@ -27,7 +29,7 @@ export const CurriculumView = ({ userCurriculum }) => {
               <ul>
                 {curriculum?.technicalSkills?.map((technicalSkills) => (
                   <>
-                    <span key={curriculum?._id} style={{ fontWeight: "bold" }}>
+                    <span key={uuidv4()} style={{ fontWeight: "bold" }}>
                       {technicalSkills?.category}
                     </span>
                     {technicalSkills?.skills?.map((skill) => (
@@ -41,57 +43,104 @@ export const CurriculumView = ({ userCurriculum }) => {
 
               <h2>Soft Skills</h2>
               <ul>
-                <li>Résolution de problèmes</li>
-                <li>Collaboration en équipe</li>
-                <li>Esprit critique</li>
+                {curriculum?.skills?.map((skills) => (
+                  <>
+                    <span
+                      key={uuidv4()}
+                      style={{ display: "flex", flexDirection: "column" }}
+                    >
+                      {skills}
+                    </span>
+                  </>
+                ))}
               </ul>
 
               <h2>{"Centres d'intérêt"}</h2>
               <ul>
-                <li>Intelligence Artificielle</li>
-                <li>Cybersécurité</li>
-                <li>Développement Open Source</li>
+                {curriculum?.areaOfInterests?.map((areaOfInterests) => (
+                  <>
+                    <span
+                      key={uuidv4()}
+                      style={{ display: "flex", flexDirection: "column" }}
+                    >
+                      {areaOfInterests}
+                    </span>
+                  </>
+                ))}
               </ul>
             </div>
 
-            <div className="main">
-              <h1>Titre CV</h1>
-              <p>Résumé de CV</p>
+            <div className={styles.main}>
+              <h1>{curriculum?.jobTitle}</h1>
+              <p>{curriculum?.description}</p>
 
-              <h2 className="highlight">Expérience Professionnelle</h2>
-              <div className="section">
+              <h2 className={styles.highlight}>Expérience Professionnelle</h2>
+              <div className={styles.section}>
                 <div className="experience-item">
-                  <h3>Software Engineer</h3>
-                  <span>Tech Solutions (2020 - 2022)</span>
-                  <ul>
-                    <li>{"Développement d'applications web évolutives."}</li>
-                    <li>Optimisation des performances systèmes.</li>
-                  </ul>
-                </div>
-                <div className="experience-item">
-                  <h3>Junior Developer</h3>
-                  <span>CodeFactory (2018 - 2019)</span>
-                  <ul>
-                    <li>
+                  {curriculum?.experiences?.map((experience) => {
+                    const startDate = new Date(experience.startYear);
+                    const endDate = new Date(experience.endYear);
+                    const formattedStartDate = startDate.toLocaleDateString(
+                      "fr-FR",
                       {
-                        "Assistance dans le développement d'applications côté client."
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       }
-                    </li>
-                    <li>Débogage de code hérité.</li>
-                  </ul>
+                    );
+
+                    const formattedEndDate = endDate.toLocaleDateString(
+                      "fr-FR",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    );
+                    return (
+                      <div key={uuidv4()}>
+                        <h3>{experience?.title}</h3>
+                        <span>{experience?.company}</span>
+                        <span>
+                          {formattedStartDate} - {formattedEndDate}
+                        </span>
+                        <p>{experience?.description}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
-              <h2 className="highlight">Formation</h2>
-              <div className="section">
-                <div className="education-item">
-                  <h3>Bachelor of Computer Science</h3>
-                  <span>Tech University (2015 - 2019)</span>
-                </div>
-                <div className="education-item">
-                  <h3>Certified React Developer</h3>
-                  <span>Online Academy (2021)</span>
-                </div>
+              <h2 className={styles.highlight}>Formation</h2>
+              <div className={styles.section}>
+                {curriculum?.educations?.map((education) => {
+                  const startDate = new Date(education.startYear);
+                  const endDate = new Date(education.endYear);
+                  const formattedStartDate = startDate.toLocaleDateString(
+                    "fr-FR",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  );
+
+                  const formattedEndDate = endDate.toLocaleDateString("fr-FR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  });
+                  return (
+                    <div key={uuidv4()}>
+                      <h3>{education?.degree}</h3>
+                      <span>{education?.school}</span>
+                      <span>
+                        {formattedStartDate} - {formattedEndDate}
+                      </span>
+                      <p>{education?.fieldOfStudy}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -109,6 +158,7 @@ CurriculumView.propTypes = {
         name: PropTypes.string.isRequired,
         lastname: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
+        jobTitle: PropTypes.string.isRequired,
         phone: PropTypes.string.isRequired,
         linkedin: PropTypes.string.isRequired,
         github: PropTypes.string.isRequired,

@@ -2,13 +2,27 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useGetCurriculums } from "../../api/curriculum/curriculum";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import styles from "./PreviewCV.module.css";
+import { NoCurriculum } from "../NoCurriculum/NoCurriculum";
 
 function PreviewCV() {
-  const { data: curriculums } = useGetCurriculums();
+  const { data: curriculums, isLoading, isError } = useGetCurriculums();
   const navigate = useNavigate();
+  if (isLoading) {
+    return (
+      <div className={styles.isLoading}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (isError || !curriculums || curriculums.error) {
+    return <NoCurriculum />;
+  }
 
   return (
-    <div className="d-flex flex-wrap justify-content-start">
+    <div className={styles.homeContainer}>
       {curriculums &&
         curriculums.map((cv) => (
           <Card

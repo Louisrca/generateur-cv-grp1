@@ -12,7 +12,7 @@ import { AuthProvider } from "./context/AuthProvider";
 
 import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
-
+import UpdateCurriculum from "./composant/UpdateCurriculum/UpdateCurriculum";
 
 function App() {
   const queryClient = new QueryClient();
@@ -53,6 +53,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Createcv />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-cv/:cvId"
+            element={
+              <ProtectedRoute>
+                <UpdateCurriculum />
               </ProtectedRoute>
             }
           />

@@ -6,7 +6,6 @@ export const NoCurriculum = () => {
     <div className={styles.noData}>
       <span>{"Vous n'avez pas encore de cv... 😢"}</span>
       <Button href="/createcv">Créer un CV</Button>
-      {/* <a href="/createcv">Créer un CV</a> */}
     </div>
   );
 };
