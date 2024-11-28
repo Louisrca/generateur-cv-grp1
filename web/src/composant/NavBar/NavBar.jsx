@@ -23,7 +23,7 @@ function NavBar() {
             <Nav.Link as={NavLink} to="/" activeclassname="active">
               Menu
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/createcv" activeclassname="active">
+            <Nav.Link as={NavLink} to="/my-cv" activeclassname="active">
               Mes CV
             </Nav.Link>
             <Nav.Link as={NavLink} to="/curriculum" activeclassname="active">

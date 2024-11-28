@@ -11,6 +11,18 @@ export const useGetCurriculums = () => {
       }),
   });
 };
+
+export const useGetCurriculumByUserId = (userId) => {
+  return useQuery({
+    queryKey: ["curriculum", userId],
+    queryFn: () =>
+      webApiCall(`/curriculum/${userId}`, {
+        body: null,
+        method: "GET",
+      }),
+  });
+};
+
 export const usePostCurriculum = () => {
   return useMutation((data) =>
     webApiCall("/curriculum", {
