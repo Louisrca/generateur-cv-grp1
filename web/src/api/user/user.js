@@ -1,5 +1,5 @@
 import { webApiCall } from "../utils/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetUserById = (userId) => {
   return useQuery({
@@ -13,16 +13,11 @@ export const useGetUserById = (userId) => {
 };
 
 export const useUpdateById = (userId) => {
-    const queryClient = useQueryClient();
-    return useMutation({
-      mutationFn: (data) =>
-        webApiCall(`/users/update/${userId}`, {
-          body: JSON.stringify(data),
-          method: "PUT",
-        }),
-      onSuccess: () => {
-        queryClient.invalidateQueries(["user"]);
-      },
-    });
-  };
-  
+  return useMutation({
+    mutationFn: (data) =>
+      webApiCall(`/users/update/${userId}`, {
+        body: JSON.stringify(data),
+        method: "PUT",
+      }),
+  });
+};

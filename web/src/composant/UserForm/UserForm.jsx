@@ -7,13 +7,15 @@ function UserForm() {
   const [isEditing, setIsEditing] = useState(false);
   const user = useAuth();
   const { data: userInformation } = useGetUserById(user.user.id);
-  const updateUser = useUpdateById();
+  const updateUser = useUpdateById(user.user.id);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    updateUser.mutate({ id: user.user.id, data });
+    console.log(data);
+
+    updateUser.mutate(data);
   };
 
   return (
