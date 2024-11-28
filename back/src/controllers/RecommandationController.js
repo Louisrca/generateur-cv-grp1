@@ -36,7 +36,6 @@ exports.getAllRecommendationsOfUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
-
     // Étape 1 : Récupérer tous les curriculums de l'utilisateur
     const curriculums = await CurriculumModels.find({ author: userId }).select(
       '_id'
@@ -89,13 +88,6 @@ exports.deleteRecommendation = async (req, res) => {
 
     if (!recommandations) {
       return res.status(404).json({ message: 'Recommandation introuvable.' });
-    }
-
-    // Vérifier que l'utilisateur connecté est l'auteur
-    if (recommandations.author.toString() !== req.user.id) {
-      return res.status(403).json({
-        message: "Vous n'êtes pas autorisé à supprimer cette recommandation.",
-      });
     }
 
     await recommandations.deleteOne();

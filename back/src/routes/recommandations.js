@@ -21,6 +21,6 @@ router.get(
 );
 
 // Supprimer une recommandation
-router.delete('/:id', deleteRecommendation);
+router.delete('/delete/:id', verifyToken, deleteRecommendation);
 
 module.exports = router;
