@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputText } from "../InputText/InputText";
 import styles from "./CreateCard.module.css";
 import CardWrapper from "../CardWrapper/CardWrappers";
-import { useRegisterUser } from "../../api/auth/register";
+import { useCreateCurriculum } from "../../api/createcurriculum/createcurriculum";
 
 const languageOptions = [
   "Anglais",
@@ -18,7 +18,8 @@ const languageOptions = [
 ];
 
 export const CreateCard = () => {
-  const registerUser = useRegisterUser();
+
+const createCurriculum = useCreateCurriculum();
 
   const [skills, setSkills] = useState([""]);
   const [languages, setLanguages] = useState([{ name: "", level: "" }]);
@@ -68,7 +69,7 @@ export const CreateCard = () => {
         exp.endYear.trim() !== "" &&
         exp.description.trim() !== ""
     );
-    registerUser.mutate(data);
+    createCurriculum.mutate(data);
 };
 
   const addSkill = () => setSkills([...skills, ""]);
@@ -157,6 +158,7 @@ export const CreateCard = () => {
                 inputName={`lastame-${index}`}
                 value={infoperso.name}
                 onChange={(e) => updateInfoperso(index, "lastname", e.target.value)}
+                required
               />
             <InputText
                 label="Prénom"
