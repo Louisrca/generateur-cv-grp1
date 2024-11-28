@@ -4,14 +4,19 @@ import styles from "./RegisterCard.module.css";
 import { useRegisterUser } from "../../api/auth/register";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterCard = () => {
   const registerUser = useRegisterUser();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     registerUser.mutate(data);
+    if (registerUser.isSuccess) {
+      navigate("/login");
+    }
   };
 
   return (
