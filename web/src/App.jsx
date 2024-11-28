@@ -27,10 +27,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/curriculum/:cvId" element={<Curriculum />} />
-        </Routes>
-
-        <Routes>
-          <Route path="/register" element={<Register />} />
           <Route
             path="/createcv"
             element={
