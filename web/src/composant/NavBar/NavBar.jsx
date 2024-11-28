@@ -20,15 +20,17 @@ function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
+
             <Nav.Link as={NavLink} to="/" activeclassname="active">
               Menu
             </Nav.Link>
             <Nav.Link as={NavLink} to="/my-cv" activeclassname="active">
               Mes CV
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/curriculum" activeclassname="active">
+            <Nav.Link as={NavLink} to="/profile" activeclassname="active">
               Mon espace
             </Nav.Link>
+
           </Nav>
 
           <Form className="d-flex">
