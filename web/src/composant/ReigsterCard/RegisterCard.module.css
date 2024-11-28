@@ -1,5 +1,10 @@
 .connectCardContainer {
   width: 35rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
 }
 
 .formContainer {
@@ -17,4 +22,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 15px;
+}
+body{
+  background-color: rgb(150, 151, 151);
 }

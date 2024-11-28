@@ -24,12 +24,12 @@ export const RegisterCard = () => {
           <InputText label="Nom" inputName="lastname" />
           <InputText label="Email" inputName="email" type="email" />
           <InputText
-            label="Mot de passee"
+            label="Mot de passe"
             type="password"
             inputName="password"
           />
 
-          <button type="submit">Se connecter</button>
+          <button type="submit">S'inscrire</button>
         </form>
         <div className={styles.redirectionContainer}>
           <Divider variant="middle" />
