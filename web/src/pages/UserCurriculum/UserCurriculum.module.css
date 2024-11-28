@@ -1,0 +1,18 @@
+.headerTitle {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  align-items: center;
+  margin: 2rem;
+  gap: 2rem;
+}
+
+.headerTitle h1 {
+  margin: 0 !important;
+  padding: 0;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+}

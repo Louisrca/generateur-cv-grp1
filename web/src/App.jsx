@@ -12,7 +12,7 @@ import { AuthProvider } from "./context/AuthProvider";
 
 import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
-import UpdateCurriculum from "./composant/UpdateCurriculum/UpdateCurriculum";
+import UpdateUserCurriculum from "./pages/UpdateUserCurriculum/UpdateUserCurriculum";
 
 function App() {
   const queryClient = new QueryClient();
@@ -60,7 +60,7 @@ function App() {
             path="/edit-cv/:cvId"
             element={
               <ProtectedRoute>
-                <UpdateCurriculum />
+                <UpdateUserCurriculum />
               </ProtectedRoute>
             }
           />

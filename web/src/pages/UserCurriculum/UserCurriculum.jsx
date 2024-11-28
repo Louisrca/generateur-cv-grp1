@@ -1,11 +1,13 @@
 import NavBar from "../../composant/NavBar/NavBar";
 import { ShowUserCurriculum } from "../../composant/ShowUserCurriculum/ShowUserCurriculum";
+import styles from "./UserCurriculum.module.css";
 import { Button } from "react-bootstrap";
+import { Add } from "@mui/icons-material";
 export default function UserCurriculum() {
   return (
     <div>
       <NavBar />
-      <div>
+      <div className={styles.headerTitle}>
         <h1
           style={{
             fontWeight: "bold",
@@ -16,7 +18,9 @@ export default function UserCurriculum() {
         >
           Mes Curriculum
         </h1>
-        <Button href="/createcv">Créer un CV</Button>
+        <Button href="/createcv">
+          <Add /> Créer un CV
+        </Button>
       </div>
 
       <ShowUserCurriculum />
