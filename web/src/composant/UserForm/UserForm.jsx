@@ -5,7 +5,6 @@ import { useState } from "react";
 import styles from "./UserForm.module.css";
 import { Link } from "react-router-dom"; // Import Link
 
-
 function UserForm() {
   const [isEditing, setIsEditing] = useState(false);
   const user = useAuth();
@@ -72,9 +71,9 @@ function UserForm() {
           {isEditing ? "Annuler" : "Editer"}
         </Button>
       </div>
-      <Link to="/profile/recommendation">
+      <Link to={`/profile/recommendation/${user.user.id}`}>
         <Button variant="outline-dark">Gérer mes recommendations</Button>
-      </Link>    
+      </Link>
     </div>
   );
 }

@@ -12,6 +12,17 @@ export const useGetRecommendation = (cvId) => {
   });
 };
 
+export const useGetRecommendationsByUser = (userId) => {
+  return useQuery({
+    queryKey: ["recommendations-by-user"],
+    queryFn: () =>
+      webApiCall(`/recommendations/all-recommendations-by-user/${userId}`, {
+        body: null,
+        method: "GET",
+      }),
+  });
+};
+
 export const useCreateRecommendation = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -36,7 +47,7 @@ export const useDeleteRecommendation = () => {
         method: "DELETE",
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries(["recommendations"]);
+      queryClient.invalidateQueries(["recommendations-by-user"]);
     },
     onError: (error) => {
       console.error("Erreur lors de la suppression :", error);

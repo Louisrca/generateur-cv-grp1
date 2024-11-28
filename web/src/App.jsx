@@ -13,7 +13,6 @@ import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
 import UserRecommendation from "./pages/UserRecommendation/UserRecommendation";
 
-
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -40,7 +39,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/curriculum/:cvId" element={<Curriculum />} />
-          <Route path="/profile/recommendation" element={<UserRecommendation />} />
+          <Route
+            path="/profile/recommendation/:id"
+            element={<UserRecommendation />}
+          />
           <Route
             path="/my-cv"
             element={
