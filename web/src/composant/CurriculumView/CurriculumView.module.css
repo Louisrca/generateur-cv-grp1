@@ -1,0 +1,16 @@
+.curriculum {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+  background-color: #212529 !important;
+
+  padding: 1.5rem;
+  color: white !important;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
