@@ -4,7 +4,7 @@ const verifyToken = require('../middleware/jwt');
 
 const {
   getCurriculums,
-  getCurriculumById,
+  getCurriculumByAuthor,
   createCurriculum,
   updateCurriculum,
   deleteCurriculum,
@@ -12,7 +12,7 @@ const {
 
 router.get('/', verifyToken, getCurriculums);
 
-router.get('/:id', verifyToken, getCurriculumById);
+router.get('/:id', verifyToken, getCurriculumByAuthor);
 
 router.post('/', verifyToken, createCurriculum);
 
