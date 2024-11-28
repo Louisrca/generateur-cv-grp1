@@ -45,7 +45,7 @@ exports.getAllRecommendationsOfUser = async (req, res) => {
     // Étape 2 : Récupérer toutes les recommandations associées aux curriculums de l'utilisateur
     const recommandations = await RecommandationsModels.find({
       curriculumId: { $in: curriculumIds },
-    }).populate('author', 'name email'); // Populate pour inclure les informations de l'auteur
+    }).populate('author'); // Populate pour inclure les informations de l'auteur
 
     res.status(200).json(recommandations);
   } catch (error) {
