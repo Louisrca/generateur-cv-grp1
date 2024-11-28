@@ -36,11 +36,14 @@ exports.getAllRecommendationsOfUser = async (req, res) => {
   try {
     const userId = req.params.userId;
 
+    console.log(userId)
+
     // Étape 1 : Récupérer tous les curriculums de l'utilisateur
     const curriculums = await CurriculumModels.find({ author: userId }).select(
       '_id'
     );
     const curriculumIds = curriculums.map((curriculum) => curriculum._id);
+    console.log(curriculumIds);
 
     // Étape 2 : Récupérer toutes les recommandations associées aux curriculums de l'utilisateur
     const recommandations = await RecommandationsModels.find({
