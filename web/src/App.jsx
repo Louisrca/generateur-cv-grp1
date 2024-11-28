@@ -9,7 +9,10 @@ import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Createcv from "./pages/CreateCV/CreateCV";
 import { AuthProvider } from "./context/AuthProvider";
+
+import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
+
 
 function App() {
   const queryClient = new QueryClient();
@@ -37,6 +40,14 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/curriculum/:cvId" element={<Curriculum />} />
+          <Route
+            path="/my-cv"
+            element={
+              <ProtectedRoute>
+                <UserCurriculum />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/createcv"
             element={
