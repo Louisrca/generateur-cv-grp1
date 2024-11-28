@@ -8,21 +8,12 @@ import Login from "./pages/Login/Login";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Createcv from "./pages/CreateCV/CreateCV";
-<<<<<<< HEAD
-=======
 import { AuthProvider } from "./context/AuthProvider";
->>>>>>> 4e3f85666da05084875a1381c3d55a747761a1b8
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-<<<<<<< HEAD
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/createcv" element={<Createcv />} />
-      </Routes>
-=======
       <AuthProvider>
         <Routes>
           <Route
@@ -50,7 +41,6 @@ function App() {
           />
         </Routes>
       </AuthProvider>
->>>>>>> 4e3f85666da05084875a1381c3d55a747761a1b8
     </QueryClientProvider>
   );
 }
