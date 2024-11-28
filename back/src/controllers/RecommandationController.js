@@ -1,5 +1,5 @@
 const RecommandationsModels = require('../models/RecommandationsModels');
-const CurriculumModels = require('../models/CurriculumModels');
+const CurriculumModels = require('../models/CurriculumModel');
 
 // Ajouter une recommandation
 exports.createRecommendation = async (req, res) => {
