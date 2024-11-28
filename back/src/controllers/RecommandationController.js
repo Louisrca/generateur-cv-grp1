@@ -34,9 +34,8 @@ exports.createRecommendation = async (req, res) => {
 // Récupérer toutes les recommandations
 exports.getAllRecommendationsOfUser = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.params.id;
 
-    console.log(userId)
 
     // Étape 1 : Récupérer tous les curriculums de l'utilisateur
     const curriculums = await CurriculumModels.find({ author: userId }).select(
@@ -50,7 +49,7 @@ exports.getAllRecommendationsOfUser = async (req, res) => {
       curriculumId: { $in: curriculumIds },
     }).populate('author'); // Populate pour inclure les informations de l'auteur
 
-    res.status(200).json(recommandations);
+    res.status(200).json({ status: '200', recommandations });
   } catch (error) {
     res.status(500).json({
       message: 'Erreur lors de la récupération des recommandations.',
