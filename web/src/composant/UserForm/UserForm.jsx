@@ -2,6 +2,7 @@ import { useGetUserById, useUpdateById } from "../../api/user/user";
 import useAuth from "../../hooks/useAuth";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import styles from "./UserForm.module.css";
 
 function UserForm() {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,28 +21,11 @@ function UserForm() {
 
   return (
     <div>
-      <div className="container">
+      <div className={styles.container}>
         <h1>Bienvenue sur ton profil {userInformation?.name} !</h1>
-        <Button variant="primary" onClick={() => setIsEditing(!isEditing)}>
-          Gérer mes recommendations
-        </Button>
+
         {isEditing ? (
-          <>
-            <div className="name">
-              <h4>Prénom:</h4>
-              <p>{userInformation?.name}</p>
-            </div>
-            <div className="lastname">
-              <h4>Nom:</h4>
-              <p>{userInformation?.lastname}</p>
-            </div>
-            <div className="Email">
-              <h4>Email:</h4>
-              <p>{userInformation?.email}</p>
-            </div>
-          </>
-        ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.userForm}>
             <div className="name">
               <h4>Prénom:</h4>
               <input type="text" name="name" />
@@ -54,11 +38,37 @@ function UserForm() {
               <h4>Email:</h4>
               <input type="text" name="email" />
             </div>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              style={{ margin: "1.5rem" }}
+              type="submit"
+            >
               Enregistrer
             </Button>
           </form>
+        ) : (
+          <div className={styles.userForm}>
+            <div className="name">
+              <h4>Prénom:</h4>
+              <p>{userInformation?.name}</p>
+            </div>
+            <div className="lastname">
+              <h4>Nom:</h4>
+              <p>{userInformation?.lastname}</p>
+            </div>
+            <div className="Email">
+              <h4>Email:</h4>
+              <p>{userInformation?.email}</p>
+            </div>
+          </div>
         )}
+        <Button
+          variant="primary"
+          style={{ margin: "2.5rem" }}
+          onClick={() => setIsEditing(!isEditing)}
+        >
+          {isEditing ? "Annuler" : "Editer"}
+        </Button>
       </div>
       <Button variant="outline-dark">Gérer mes recommendations</Button>
       <Button variant="outline-dark">Editer mon profil</Button>
