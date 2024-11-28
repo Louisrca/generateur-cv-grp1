@@ -1,42 +1,93 @@
 import styles from "./CurriculumView.module.css";
-import { Card } from "@mui/material";
+
 import PropTypes from "prop-types";
 
 export const CurriculumView = ({ userCurriculum }) => {
+  console.log(userCurriculum);
   return (
     <>
       {userCurriculum.map((curriculum) => (
-        <Card key={curriculum._id} className={styles.curriculum}>
-          <section>
-            <h1>{curriculum.title}</h1>
-            <p>{curriculum.description}</p>
-          </section>
-          <section className={styles.content}>
-            <section>
-              <h3>Experiences</h3>
-              {curriculum.experiences.map((experience) => (
-                <div key={experience.id}>
-                  <h4>{experience.title}</h4>
-                  <p>{experience.company}</p>
-                  <p>{experience.startYear}</p>
-                  <p>{experience.endYear}</p>
-                  <p>{experience.description}</p>
-                </div>
+        <div key={curriculum._id} className={styles.container}>
+          <div className="sidebar">
+            <h2>
+              {curriculum.name} {curriculum.lastname}
+            </h2>
+
+            <p>Email: {curriculum.email}</p>
+            <p>Téléphone: {curriculum.phone}</p>
+
+            <h2>Compétences Techniques</h2>
+            <ul>
+              {curriculum.technicalSkills.map((technicalSkills) => (
+                <>
+                  <span key={curriculum._id} style={{ fontWeight: "bold" }}>
+                    {technicalSkills.category}
+                  </span>
+                  {technicalSkills.skills.map((skill) => (
+                    <li key={skill.name}>
+                      {skill.name} ({skill.level})
+                    </li>
+                  ))}
+                </>
               ))}
-            </section>
-            <section>
-              <h3>Education</h3>
-              {curriculum.educations.map((education) => (
-                <div key={education.id}>
-                  <h4>{education.school}</h4>
-                  <p>{education.degree}</p>
-                  <p>{education.startYear}</p>
-                  <p>{education.endYear}</p>
-                </div>
-              ))}
-            </section>
-          </section>
-        </Card>
+            </ul>
+
+            <h2>Soft Skills</h2>
+            <ul>
+              <li>Résolution de problèmes</li>
+              <li>Collaboration en équipe</li>
+              <li>Esprit critique</li>
+            </ul>
+
+            <h2>{"Centres d'intérêt"}</h2>
+            <ul>
+              <li>Intelligence Artificielle</li>
+              <li>Cybersécurité</li>
+              <li>Développement Open Source</li>
+            </ul>
+          </div>
+
+          <div className="main">
+            <h1>Titre CV</h1>
+            <p>Résumé de CV</p>
+
+            <h2 className="highlight">Expérience Professionnelle</h2>
+            <div className="section">
+              <div className="experience-item">
+                <h3>Software Engineer</h3>
+                <span>Tech Solutions (2020 - 2022)</span>
+                <ul>
+                  <li>{"Développement d'applications web évolutives."}</li>
+                  <li>Optimisation des performances systèmes.</li>
+                </ul>
+              </div>
+              <div className="experience-item">
+                <h3>Junior Developer</h3>
+                <span>CodeFactory (2018 - 2019)</span>
+                <ul>
+                  <li>
+                    {
+                      "Assistance dans le développement d'applications côté client."
+                    }
+                  </li>
+                  <li>Débogage de code hérité.</li>
+                </ul>
+              </div>
+            </div>
+
+            <h2 className="highlight">Formation</h2>
+            <div className="section">
+              <div className="education-item">
+                <h3>Bachelor of Computer Science</h3>
+                <span>Tech University (2015 - 2019)</span>
+              </div>
+              <div className="education-item">
+                <h3>Certified React Developer</h3>
+                <span>Online Academy (2021)</span>
+              </div>
+            </div>
+          </div>
+        </div>
       ))}
     </>
   );

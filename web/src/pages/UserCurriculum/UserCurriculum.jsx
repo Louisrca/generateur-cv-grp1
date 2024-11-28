@@ -4,7 +4,16 @@ export default function UserCurriculum() {
   return (
     <div>
       <NavBar />
-      UserCurriculum
+      <h1
+        style={{
+          fontWeight: "bold",
+          marginBottom: "4rem",
+          marginLeft: "4rem",
+          marginTop: "2rem",
+        }}
+      >
+        Mes Curriculum
+      </h1>
       <ShowUserCurriculum />
     </div>
   );
