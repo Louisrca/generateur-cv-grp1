@@ -4,11 +4,27 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import { useGetCurriculums } from "../../api/curriculum/curriculum";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import styles from "./PreviewCV.module.css";
+import { NoCurriculum } from "../NoCurriculum/NoCurriculum";
 
 function PreviewCV() {
+
   const { data: curriculums } = useGetCurriculums(); // Récupère tous les CV
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+
+ if (isLoading) {
+    return (
+      <div className={styles.isLoading}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (isError || !curriculums || curriculums.error) {
+    return <NoCurriculum />;
+  }
 
   // Fonction pour filtrer les CV selon le nom ou prénom
   const filteredCurriculums =
@@ -30,7 +46,7 @@ function PreviewCV() {
         />
       </Form>
 
-      <div className="d-flex flex-wrap justify-content-start">
+     <div className={styles.homeContainer}>
         {filteredCurriculums.length > 0 ? (
           filteredCurriculums.map((cv) => (
             <Card

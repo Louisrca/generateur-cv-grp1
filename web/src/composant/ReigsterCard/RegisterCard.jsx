@@ -29,7 +29,7 @@ export const RegisterCard = () => {
             inputName="password"
           />
 
-          <button type="submit">S'inscrire</button>
+          <button type="submit">{"S'inscrire"}</button>
         </form>
         <div className={styles.redirectionContainer}>
           <Divider variant="middle" />

@@ -11,7 +11,11 @@ import Createcv from "./pages/CreateCV/CreateCV";
 import { AuthProvider } from "./context/AuthProvider";
 import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
+
+import UpdateUserCurriculum from "./pages/UpdateUserCurriculum/UpdateUserCurriculum";
+
 import UserRecommendation from "./pages/UserRecommendation/UserRecommendation";
+
 
 function App() {
   const queryClient = new QueryClient();
@@ -56,6 +60,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Createcv />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/edit-cv/:cvId"
+            element={
+              <ProtectedRoute>
+                <UpdateUserCurriculum />
               </ProtectedRoute>
             }
           />
