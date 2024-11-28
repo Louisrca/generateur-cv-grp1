@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import TokenExpired from "./tokenExpiration";
 
-export const decodeJwtToken = ({ jwtToken, setUser }) => {
+export const decodeJwtToken = (jwtToken, setUser) => {
   if (!jwtToken) {
     console.error("JWT token is empty or undefined");
     return;
