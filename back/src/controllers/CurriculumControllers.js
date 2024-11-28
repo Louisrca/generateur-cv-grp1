@@ -25,7 +25,7 @@ const getCurriculumByAuthor = async (req, res) => {
 
     if (!curriculums || curriculums.length === 0) {
       return res
-        .status(404)
+        .status(200)
         .json({ error: 'No curriculums found for this author' });
     }
 
