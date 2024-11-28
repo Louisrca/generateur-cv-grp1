@@ -1,4 +1,5 @@
 const RecommandationsModels = require('../models/RecommandationsModels');
+const CurriculumModels = require('../models/CurriculumModel');
 
 // Ajouter une recommandation
 exports.createRecommendation = async (req, res) => {
@@ -25,6 +26,32 @@ exports.createRecommendation = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Erreur lors de l'ajout de la recommandation.",
+      error: error.message,
+    });
+  }
+};
+
+// Récupérer toutes les recommandations
+exports.getAllRecommendationsOfUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Étape 1 : Récupérer tous les curriculums de l'utilisateur
+    const curriculums = await CurriculumModels.find({ author: userId }).select(
+      '_id'
+    );
+    const curriculumIds = curriculums.map((curriculum) => curriculum._id);
+    console.log(curriculumIds);
+
+    // Étape 2 : Récupérer toutes les recommandations associées aux curriculums de l'utilisateur
+    const recommandations = await RecommandationsModels.find({
+      curriculumId: { $in: curriculumIds },
+    }).populate('author'); // Populate pour inclure les informations de l'auteur
+
+    res.status(200).json({ status: '200', recommandations });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Erreur lors de la récupération des recommandations.',
       error: error.message,
     });
   }
@@ -61,13 +88,6 @@ exports.deleteRecommendation = async (req, res) => {
 
     if (!recommandations) {
       return res.status(404).json({ message: 'Recommandation introuvable.' });
-    }
-
-    // Vérifier que l'utilisateur connecté est l'auteur
-    if (recommandations.author.toString() !== req.user.id) {
-      return res.status(403).json({
-        message: "Vous n'êtes pas autorisé à supprimer cette recommandation.",
-      });
     }
 
     await recommandations.deleteOne();

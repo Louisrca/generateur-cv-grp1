@@ -1,5 +1,5 @@
 import { webApiCall } from "../utils/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetCurriculums = () => {
   return useQuery({
@@ -45,6 +45,7 @@ export const usePostCurriculum = () => {
     })
   );
 };
+
 export const useUpdateCurriculum = (userId) => {
   return useMutation((data) =>
     webApiCall(`/curriculum/${userId}`, {
@@ -54,11 +55,28 @@ export const useUpdateCurriculum = (userId) => {
   );
 };
 
-export const useDeleteCurriculum = (cvId) => {
-  return useMutation(() =>
-    webApiCall(`/curriculum/${cvId}`, {
-      body: null,
-      method: "DELETE",
-    })
-  );
+
+
+export const useDeleteCurriculum = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    // La fonction pour effectuer la requête DELETE
+    mutationFn: (cvId) =>
+      webApiCall(`/curriculum/${cvId}`, {
+        method: "DELETE",
+      }),
+
+    // Callback pour gérer le succès
+    onSuccess: () => {
+      // Rafraîchit les données liées aux curriculums et recommandations
+      queryClient.invalidateQueries(["curriculum"]); // Si vous avez une clé pour les curriculums
+    },
+
+    // Callback pour gérer les erreurs
+    onError: (error) => {
+      console.error("Erreur lors de la suppression du curriculum :", error);
+    },
+  });
+
 };

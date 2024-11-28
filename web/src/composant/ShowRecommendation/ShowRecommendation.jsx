@@ -1,8 +1,8 @@
-import { useGetRecommentation } from "../../api/recommendation/recommendation";
+import { useGetRecommendation } from "../../api/recommendation/recommendation";
 import { useParams } from "react-router-dom";
 export const ShowRecommendation = () => {
   const { cvId } = useParams();
-  const { data: recommendation } = useGetRecommentation(cvId);
+  const { data: recommendation } = useGetRecommendation(cvId);
   return (
     <div>
       Commentaires :
