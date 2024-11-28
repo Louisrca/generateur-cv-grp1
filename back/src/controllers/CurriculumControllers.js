@@ -21,7 +21,7 @@ const getCurriculumByAuthor = async (req, res) => {
     }
 
     // Trouver le(s) curriculum(s) par auteur
-    const curriculums = await Curriculum.findAllByAuthor(authorId);
+    const curriculums = await Curriculum.find({ author: authorId }).populate('author');
 
     if (!curriculums || curriculums.length === 0) {
       return res
