@@ -30,6 +30,20 @@ exports.createRecommendation = async (req, res) => {
   }
 };
 
+// Récupérer toutes les recommandations
+exports.getAllRecommendations = async (req, res) => {
+  try {
+    // Récupération de toutes les recommandations
+    const recommandations = await RecommandationsModels.find();
+    res.status(200).json(recommandations);
+  } catch (error) {
+    res.status(500).json({
+      message: 'Erreur lors de la récupération des recommandations.',
+      error: error.message,
+    });
+  }
+};
+
 // Récupérer les recommandations d'un CV spécifique
 exports.getRecommendationsByCVId = async (req, res) => {
   try {
