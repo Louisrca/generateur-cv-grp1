@@ -16,9 +16,9 @@ Cette application est un Générateur de CV permettant aux utilisateurs de :
 
 ## Pour accéder au projet :
 
-Le back du projet est hébergé sur Render.com via : [Documentation du Back]([https://exemple.com](https://back-generateur-cv-grp1.onrender.com/api-docs))
+Le back du projet est hébergé sur Render.com via : [Documentation du Back](https://back-generateur-cv-grp1.onrender.com/api-docs)
 
-Le front du projet est hébergé sur Render.com via : [SimplyCV]([https://exemple.com](https://front-generateur-cv-grp1.onrender.com/))
+Le front du projet est hébergé sur Render.com via : [SimplyCV](https://front-generateur-cv-grp1.onrender.com/)
 
 
 ## Pour lancer le back en local :
