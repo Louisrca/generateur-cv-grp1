@@ -47,7 +47,7 @@ const UploadImage = ({ cvId }) => {
         ) : (
           <img
             style={{ width: "6rem", height: "6rem", borderRadius: "50%" }}
-            src="./image.png"
+            src="/image.png"
             alt="profile"
           />
         )}
