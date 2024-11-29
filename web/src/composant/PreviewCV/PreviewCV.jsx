@@ -9,12 +9,11 @@ import styles from "./PreviewCV.module.css";
 import { NoCurriculum } from "../NoCurriculum/NoCurriculum";
 
 function PreviewCV() {
-
-  const { data: curriculums } = useGetCurriculums(); // Récupère tous les CV
+  const { data: curriculums, isLoading, isError } = useGetCurriculums(); // Récupère tous les CV
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
- if (isLoading) {
+  if (isLoading) {
     return (
       <div className={styles.isLoading}>
         <CircularProgress />
@@ -46,7 +45,7 @@ function PreviewCV() {
         />
       </Form>
 
-     <div className={styles.homeContainer}>
+      <div className={styles.homeContainer}>
         {filteredCurriculums.length > 0 ? (
           filteredCurriculums.map((cv) => (
             <Card

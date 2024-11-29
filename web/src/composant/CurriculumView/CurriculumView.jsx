@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Button } from "react-bootstrap";
 import { useDeleteCurriculum } from "../../api/curriculum/curriculum";
 import PropTypes from "prop-types";
-
+import { Edit, Delete } from "@mui/icons-material";
 
 export const CurriculumView = ({ userCurriculum }) => {
   const { mutate: deleteCurriculum } = useDeleteCurriculum();
@@ -13,8 +13,8 @@ export const CurriculumView = ({ userCurriculum }) => {
       deleteCurriculum(cvId);
     }
   };
-  
-   const curriculumData = Array.isArray(userCurriculum)
+
+  const curriculumData = Array.isArray(userCurriculum)
     ? userCurriculum
     : [userCurriculum];
 
@@ -22,15 +22,18 @@ export const CurriculumView = ({ userCurriculum }) => {
     <>
       {curriculumData.map((curriculum) => (
         <div key={curriculum._id} className={styles.mainContainer}>
-         <Button href={"edit-cv/" + curriculum?._id}> Editer</Button>
-          <button onClick={()=>handleDelete(curriculum._id)}>Delete</button>
-   
-        <div key={curriculum._id} className={styles.container}>
-          <div className="sidebar">
-            <h2>
-              {curriculum.name} {curriculum.lastname}
-            </h2>
-
+          <div className={styles.buttonAction}>
+            <Button href={"edit-cv/" + curriculum?._id}>
+              {" "}
+              <Edit />
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => handleDelete(curriculum._id)}
+            >
+              <Delete />
+            </Button>
+          </div>
 
           <div key={uuidv4()} className={styles.container}>
             <div className={styles.sidebar}>
@@ -160,7 +163,6 @@ export const CurriculumView = ({ userCurriculum }) => {
               </div>
             </div>
           </div>
-        </div>
         </div>
       ))}
     </>

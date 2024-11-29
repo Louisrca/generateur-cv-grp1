@@ -5,6 +5,11 @@
   margin-top: 2rem;
   max-width: 800px;
 }
+.buttonAction {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
 .container {
   display: flex;
 
