@@ -1,6 +1,6 @@
 # Générateur de CV
 
-## Composition du groupe : 
+## Composition du groupe 1 : 
 - Nicolas BELLANGER
 - Yanis ARAR
 - Louis ROCCA
