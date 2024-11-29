@@ -29,7 +29,7 @@ function PreviewCV() {
   const filteredCurriculums =
     curriculums?.filter((cv) => {
       const fullName = `${cv.name} ${cv.lastname}`.toLowerCase();
-      return fullName.includes(searchQuery.toLowerCase().trim());
+      return fullName.includes(searchQuery.toLowerCase().trim()) && cv.isPublic;
     }) || [];
 
   return (
