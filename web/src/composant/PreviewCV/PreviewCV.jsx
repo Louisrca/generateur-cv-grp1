@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import styles from "./PreviewCV.module.css";
 import { NoCurriculum } from "../NoCurriculum/NoCurriculum";
+import useAuth from "../../hooks/useAuth";
 
 function PreviewCV() {
   const { data: curriculums, isLoading, isError } = useGetCurriculums(); // Récupère tous les CV
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const { user } = useAuth();
 
   if (isLoading) {
     return (
@@ -21,7 +23,7 @@ function PreviewCV() {
     );
   }
 
-  if (isError || !curriculums || curriculums.error) {
+  if (isError || !Array.isArray(curriculums) || curriculums.error) {
     return <NoCurriculum />;
   }
 
@@ -46,8 +48,8 @@ function PreviewCV() {
       </Form>
 
       <div className={styles.homeContainer}>
-        {filteredCurriculums.length > 0 ? (
-          filteredCurriculums.map((cv) => (
+        {filteredCurriculums?.length > 0 ? (
+          filteredCurriculums?.map((cv) => (
             <Card
               key={cv._id}
               style={{ width: "18rem", margin: "1rem" }}
@@ -56,12 +58,21 @@ function PreviewCV() {
               <Card.Body>
                 <Card.Title>{`${cv.name} ${cv.lastname}`}</Card.Title>
                 <Card.Text>{cv.description}</Card.Text>
-                <Button
-                  variant="outline-light"
-                  onClick={() => navigate(`/curriculum/${cv._id}`)}
-                >
-                  En savoir plus
-                </Button>
+                {user ? (
+                  <Button
+                    variant="outline-light"
+                    onClick={() => navigate(`/curriculum/${cv._id}`)}
+                  >
+                    En savoir plus
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline-light"
+                    onClick={() => alert("Connectez-vous pour voir le CV")}
+                  >
+                    En savoir plus
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           ))
