@@ -102,6 +102,10 @@ const CurriculumSchema = Schema({
     type: Boolean,
     default: false,
   },
+  imageUrl: {
+    type: String,
+    required: false,
+  },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',

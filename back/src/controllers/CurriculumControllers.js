@@ -1,11 +1,15 @@
 const Curriculum = require('../models/CurriculumModel');
+const Image = require('../models/Image');
 const { verifyCurriculum } = require('../validator/CurriculumValidator');
+
 const mongoose = require('mongoose');
 
 const getCurriculums = async (req, res) => {
   try {
-    const products = await Curriculum.find();
-    return res.json(products);
+    const curriculum = await Curriculum.find({ isPublic: true }).populate(
+      'author'
+    );
+    return res.json(curriculum);
   } catch (error) {
     return res.status(500).json({ error: `Internal server error : ${error}` });
   }
@@ -13,13 +17,30 @@ const getCurriculums = async (req, res) => {
 
 const getCurriculumById = async (req, res) => {
   try {
+    // Récupérer le curriculum par ID
     const curriculum = await Curriculum.findById(req.params.id);
+
     if (!curriculum) {
       return res.status(404).json({ error: 'Curriculum not found' });
     }
+
+    // Récupérer l'image associée au curriculum si elle existe
+    const image = await Image.findOne({ curriculumId: curriculum._id });
+
+    // Si une image est trouvée, ajoutez son Data URI
+    if (image) {
+      const base64Image = image.image.data.toString('base64');
+      const contentType = image.image.contentType || 'image/jpeg'; // Par défaut à 'image/jpeg' si non défini
+      const dataUri = `data:${contentType};base64,${base64Image}`;
+      curriculum.imageUrl = dataUri; // Ajouter l'image en Data URI au curriculum
+    } else {
+      curriculum.imageUrl = '/default-image.jpg'; // Image par défaut si aucune image n'est trouvée
+    }
+
+    // Retourner le curriculum avec l'image ajoutée (si elle existe)
     return res.status(200).json(curriculum);
   } catch (error) {
-    return res.status(500).json({ error: `Internal server error : ${error}` });
+    return res.status(500).json({ error: `Internal server error: ${error}` });
   }
 };
 
@@ -36,6 +57,21 @@ const getCurriculumByAuthor = async (req, res) => {
     const curriculums = await Curriculum.find({ author: authorId }).populate(
       'author'
     );
+
+    // Parcourir les curriculums pour récupérer l'image associée
+    for (let curriculum of curriculums) {
+      const image = await Image.findOne({ curriculumId: curriculum._id });
+
+      // Si une image est trouvée, ajoutez son Data URI
+      if (image) {
+        const base64Image = image.image.data.toString('base64');
+        const contentType = image.image.contentType || 'image/jpeg'; // Par défaut à 'image/jpeg' si non défini
+        const dataUri = `data:${contentType};base64,${base64Image}`;
+        curriculum.imageUrl = dataUri; // Ajouter l'image en Data URI au curriculum
+      } else {
+        curriculum.imageUrl = '/default-image.jpg'; // Image par défaut si aucune image n'est trouvée
+      }
+    }
 
     if (!curriculums || curriculums.length === 0) {
       return res
@@ -72,6 +108,7 @@ const createCurriculum = (req, res) => {
       educations: req.body.educations,
       experiences: req.body.experiences,
       areaOfInterests: req.body.areaOfInterests,
+      isPublic: req.body.isPublic,
       createAt: Date.now(),
       updateAt: Date.now(),
       author: req.user,
@@ -120,6 +157,7 @@ const updateCurriculum = async (req, res) => {
     curriculum.experiences = req.body.experiences;
     curriculum.educations = req.body.educations;
     curriculum.areaOfInterests = req.body.areaOfInterests;
+    curriculum.isPublic = req.body.isPublic;
     curriculum.updatedAt = Date.now();
 
     console.log('Curriculum before save:', curriculum);

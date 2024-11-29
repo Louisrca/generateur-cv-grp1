@@ -71,13 +71,96 @@ exports.getAllImages = async (req, res) => {
 };
 exports.getImageById = async (req, res) => {
   try {
-    const image = await Image.findById(req.params.id);
+    // Utilisez findOne pour trouver une seule image correspondant au curriculumId
+    const image = await Image.findOne({
+      curriculumId: req.params.curriculumId,
+    });
 
-    if (!image) {
-      return res.status(404).send({ error: 'Image not found' });
+    // Si une image est trouvée, ajoutez son Data URI
+    if (image) {
+      const base64Image = image.image.data.toString('base64');
+      const contentType = image.image.contentType || 'image/jpeg'; // Par défaut à 'image/jpeg' si non défini
+      const dataUri = `data:${contentType};base64,${base64Image}`;
+      return res.status(200).send({ imageUrl: dataUri }); // Ajouter l'image en Data URI au curriculum
+    } else {
+      return res.status(200).send({ imageUrl: '/default-image.jpg' }); // Image par défaut si aucune image n'est trouvée
     }
-    res.set('Content-Type', image.image.contentType);
-    res.send(image.image.data);
+  } catch (error) {
+    return res.status(500).send({
+      error: 'Server error: ' + error.message,
+    });
+  }
+};
+
+exports.updateImage = async (req, res) => {
+  try {
+    // Vérifier si un fichier a été envoyé
+    if (!req.file) {
+      return res.status(400).send({
+        error: 'No image file provided.',
+      });
+    }
+
+    // Vérifier si le curriculumId est envoyé dans le corps de la requête
+    if (!req.body.curriculumId) {
+      return res.status(400).send({
+        error: 'Curriculum ID not sent.',
+      });
+    }
+
+    // Vérifier si l'image existe pour ce curriculumId
+    let image = await Image.findOne({ curriculumId: req.body.curriculumId });
+
+    // Si l'image n'existe pas, créer une nouvelle image
+    if (!image) {
+      // Vérifier les types MIME autorisés
+      const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!allowedMimeTypes.includes(req.file.mimetype)) {
+        return res.status(400).send({
+          error: 'Invalid file type. Only JPEG, PNG, and GIF are allowed.',
+        });
+      }
+
+      // Créer une nouvelle image si elle n'existe pas
+      image = new Image({
+        name: req.file.originalname,
+        image: {
+          data: req.file.buffer,
+          contentType: req.file.mimetype,
+        },
+        curriculumId: req.body.curriculumId,
+      });
+
+      // Sauvegarder la nouvelle image dans la base de données
+      const savedImage = await image.save();
+
+      return res.status(200).send({
+        message: 'Image uploaded and saved successfully.',
+        image: savedImage,
+      });
+    }
+
+    // Si l'image existe déjà, procéder à la mise à jour
+    // Vérifier les types MIME autorisés
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedMimeTypes.includes(req.file.mimetype)) {
+      return res.status(400).send({
+        error: 'Invalid file type. Only JPEG, PNG, and GIF are allowed.',
+      });
+    }
+
+    // Mettre à jour l'image
+    image.name = req.file.originalname;
+    image.image.data = req.file.buffer;
+    image.image.contentType = req.file.mimetype;
+
+    // Sauvegarder l'image mise à jour
+    const updatedImage = await image.save();
+
+    res.status(200).send({
+      message: 'Image updated successfully.',
+      image: updatedImage,
+    });
   } catch (error) {
     res.status(500).send({
       error: 'Server error: ' + error.message,
