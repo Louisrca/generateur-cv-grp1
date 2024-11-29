@@ -35,7 +35,7 @@
  * @swagger
  * /upload:
  *   post:
- *     summary: Upload a new image
+ *     summary: Upload a new image (Deprecated)
  *     description: Upload an image and associate it with a specific curriculum.
  *     tags:
  *       - Upload
