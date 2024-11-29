@@ -1,0 +1,43 @@
+/* Container pour centrer et avoir un peu de marge */
+.recommendationForm {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.textareaContainer {
+  width: 100%;
+  max-width: 600px; /* Limite la largeur du textarea */
+  margin: 20px auto; /* Centré horizontalement */
+}
+
+/* Style du textarea */
+.customTextarea {
+  width: 100%;
+  min-width: 400px;
+  height: 100px;
+  padding: 12px; /* Espacement à l'intérieur */
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  border: 2px solid #ccc; /* Bordure légère */
+  border-radius: 8px; /* Coins arrondis */
+  background-color: #f9f9f9; /* Fond léger */
+  color: #333; /* Texte sombre */
+  outline: none; /* Enlève l'effet de focus par défaut */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transition fluide au focus */
+}
+
+/* Effet au focus */
+.customTextarea:focus {
+  border-color: #4caf50; /* Bordure verte au focus */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.6); /* Ombre légère au focus */
+  background-color: #fff; /* Fond blanc au focus */
+}
+
+/* Placeholder stylisé */
+.customTextarea::placeholder {
+  color: #888; /* Couleur plus claire pour le placeholder */
+  font-style: italic;
+}
