@@ -79,10 +79,10 @@ const UpdateForm = ({ curriculumDetails = {} }) => {
         <div className={styles.section}>
           <div>
             <label>
-              <Checkbox
-                checked={isPublicValue}
-                onChange={(e) => setValue("isPublic", e.target.checked)}
-              />
+            <Checkbox
+              checked={isPublicValue} // Regardez l'état actuel
+              onChange={(e) => setValue("isPublic", e.target.checked)} // Synchronisez le state React Hook Form
+            />
               Rendre mon CV public
             </label>
           </div>

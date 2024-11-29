@@ -120,6 +120,7 @@ const updateCurriculum = async (req, res) => {
     curriculum.experiences = req.body.experiences;
     curriculum.educations = req.body.educations;
     curriculum.areaOfInterests = req.body.areaOfInterests;
+    curriculum.isPublic = req.body.isPublic;
     curriculum.updatedAt = Date.now();
 
     console.log('Curriculum before save:', curriculum);
