@@ -13,7 +13,7 @@ export const CurriculumPreview = ({ userCurriculum }) => {
   return (
     <>
       {curriculumData.map((curriculum) => (
-        <div key={curriculum._id} className={styles.mainContainer}>
+        <div key={uuidv4()} className={styles.mainContainer}>
           <div key={uuidv4()} className={styles.container}>
             <div className={styles.sidebar}>
               <div
@@ -54,14 +54,17 @@ export const CurriculumPreview = ({ userCurriculum }) => {
               <p>Téléphone: {curriculum?.phone}</p>
 
               <h2>Compétences Techniques</h2>
-              <ul>
-                {curriculum?.technicalSkills?.map((technicalSkills) => (
+              <ul key={uuidv4()}>
+                {curriculum?.technicalSkills?.map((technicalSkills, index) => (
                   <>
-                    <span key={uuidv4()} style={{ fontWeight: "bold" }}>
+                    <span
+                      key={`technicalSkills-${index}`}
+                      style={{ fontWeight: "bold" }}
+                    >
                       {technicalSkills?.category}
                     </span>
                     {technicalSkills?.skills?.map((skill) => (
-                      <li key={skill.name}>
+                      <li key={uuidv4()}>
                         {skill?.name} ({skill?.level})
                       </li>
                     ))}

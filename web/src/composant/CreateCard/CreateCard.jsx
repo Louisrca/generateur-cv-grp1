@@ -1,5 +1,6 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { usePostCurriculum } from "../../api/curriculum/curriculum";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateCard = () => {
   const { register, handleSubmit, control } = useForm({
@@ -157,13 +158,13 @@ const CreateCard = () => {
         {/* Technical Skills */}
         <h3>Technical Skills</h3>
         {techSkillCategories.map((field, categoryIndex) => (
-          <div key={field.id}>
+          <div key={uuidv4()}>
             <input
               {...register(`technicalSkills.${categoryIndex}.category`)}
               placeholder="Category"
             />
             {field.skills.map((skill, skillIndex) => (
-              <div key={skillIndex}>
+              <div key={uuidv4()}>
                 <input
                   {...register(
                     `technicalSkills.${categoryIndex}.skills.${skillIndex}.name`
@@ -199,7 +200,7 @@ const CreateCard = () => {
         {/* Experiences */}
         <h3>Experiences</h3>
         {experienceFields.map((field, index) => (
-          <div key={field.id}>
+          <div key={uuidv4()}>
             <input
               {...register(`experiences.${index}.title`)}
               placeholder="Job Title"
@@ -242,7 +243,7 @@ const CreateCard = () => {
         {/* Education */}
         <h3>Education</h3>
         {educationFields.map((field, index) => (
-          <div key={field.id}>
+          <div key={uuidv4()}>
             <input
               {...register(`educations.${index}.school`)}
               placeholder="School"
@@ -285,7 +286,7 @@ const CreateCard = () => {
         {/* Area of Interests */}
         <h3>Areas of Interest</h3>
         {interestFields.map((field, index) => (
-          <div key={field.id}>
+          <div key={uuidv4()}>
             <input
               {...register(`areaOfInterests.${index}`)}
               placeholder="Area of Interest"
