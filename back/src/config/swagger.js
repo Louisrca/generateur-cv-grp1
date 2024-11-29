@@ -10,7 +10,10 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000/api/',
+        url: [
+          'http://localhost:8080/api/',
+          'https://back-generateur-cv-grp1.onrender.com/api',
+        ],
       },
     ],
   },
