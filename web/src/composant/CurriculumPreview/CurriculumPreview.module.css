@@ -1,0 +1,106 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 2rem;
+    max-width: 800px;
+  }
+  .buttonAction {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .container {
+    display: flex;
+  
+    min-height: 700px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .sidebar {
+    background-color: #b4d2ff;
+    width: 30%;
+    padding: 20px;
+    border-radius: 10px 0 0 10px;
+    color: #333;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  
+  .sidebar p {
+    margin: 5px 0;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 8px;
+  }
+  
+  .main {
+    background-color: #ffffff;
+    width: 70%;
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .main h1 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #333;
+  }
+  
+  .main h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #0e6efc;
+  }
+  
+  .main .section {
+    margin-bottom: 20px;
+  }
+  
+  .main .section ul {
+    list-style: square;
+    padding-left: 20px;
+  }
+  
+  .main .section ul li {
+    margin-bottom: 5px;
+  }
+  
+  .main .experience-item,
+  .main .education-item {
+    margin-bottom: 15px;
+  }
+  
+  .main .experience-item h3,
+  .main .education-item h3 {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .main .experience-item span,
+  .main .education-item span {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .main .highlight {
+    background-color: #b4d2ff;
+    display: inline-block;
+    padding: 2px 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
