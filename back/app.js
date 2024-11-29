@@ -13,7 +13,7 @@ connectToDatabase();
 const corsOptions = {
   origin: [
     'http://localhost:5173',
-    'https://front-generateur-cv-grp1.onrender.com/',
+    'https://front-generateur-cv-grp1.onrender.com',
   ],
 
   optionsSuccessStatus: 200,
