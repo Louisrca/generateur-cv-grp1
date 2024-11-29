@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login/Login";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Createcv from "./pages/CreateCV/CreateCV";
+import Createcv from "./pages/Createcv/Createcv";
 import { AuthProvider } from "./context/AuthProvider";
 import UserCurriculum from "./pages/UserCurriculum/UserCurriculum";
 import UserGestion from "./pages/UserGestion/UserGestion";
