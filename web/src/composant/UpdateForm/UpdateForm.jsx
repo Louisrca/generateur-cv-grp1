@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import styles from "./UpdateForm.module.css";
 import { Checkbox } from "@mui/material";
 
-const UpdateForm = ({ curriculumDetails }) => {
+const UpdateForm = ({ curriculumDetails = {} }) => {
   const { cvId } = useParams();
 
   const formatDate = (date) => {
@@ -18,15 +18,10 @@ const UpdateForm = ({ curriculumDetails }) => {
     return `${year}-${month}-${day}`;
   };
 
-  const { register, handleSubmit, control, reset, watch } = useForm({
+  const { register, handleSubmit, control, reset, watch, setValue } = useForm({
     defaultValues: {
       ...curriculumDetails,
-      isPublic:
-        curriculumDetails?.isPublic === "true"
-          ? true
-          : curriculumDetails?.isPublic === "false"
-          ? false
-          : curriculumDetails?.isPublic,
+      isPublic: curriculumDetails?.isPublic ?? false,
       experiences: curriculumDetails?.experiences?.map((exp) => ({
         ...exp,
         startYear: formatDate(exp.startYear),
@@ -42,15 +37,7 @@ const UpdateForm = ({ curriculumDetails }) => {
 
   useEffect(() => {
     if (curriculumDetails) {
-      reset({
-        ...curriculumDetails,
-        isPublic:
-          curriculumDetails?.isPublic === "true"
-            ? true
-            : curriculumDetails?.isPublic === "false"
-            ? false
-            : curriculumDetails?.isPublic,
-      });
+      reset(curriculumDetails);
     }
   }, [curriculumDetails, reset]);
 
@@ -92,25 +79,28 @@ const UpdateForm = ({ curriculumDetails }) => {
         <div className={styles.section}>
           <div>
             <label>
-              <Checkbox {...register("isPublic")} checked={isPublicValue} />
-              Make Profile Public
+              <Checkbox
+                checked={isPublicValue}
+                onChange={(e) => setValue("isPublic", e.target.checked)}
+              />
+              Rendre mon CV public
             </label>
           </div>
-          <label className={styles.label}>First Name:</label>
+          <label className={styles.label}>Prénom :</label>
           <input
             {...register("name")}
             className={styles.input}
             placeholder="First Name"
           />
 
-          <label className={styles.label}>Last Name:</label>
+          <label className={styles.label}>Nom :</label>
           <input
             {...register("lastname")}
             className={styles.input}
             placeholder="Last Name"
           />
 
-          <label className={styles.label}>Job Title:</label>
+          <label className={styles.label}>Titre du Job:</label>
           <input
             {...register("jobTitle")}
             className={styles.input}
@@ -132,7 +122,7 @@ const UpdateForm = ({ curriculumDetails }) => {
             placeholder="Description"
           />
 
-          <label className={styles.label}>Phone:</label>
+          <label className={styles.label}>Tél:</label>
           <input
             {...register("phone")}
             className={styles.input}
@@ -170,7 +160,7 @@ const UpdateForm = ({ curriculumDetails }) => {
             className={`${styles.button} ${styles.addButton}`}
             onClick={() => appendSkill("")}
           >
-            Add Skill
+            Ajouter Skill
           </button>
         </div>
 
@@ -200,13 +190,13 @@ const UpdateForm = ({ curriculumDetails }) => {
             className={`${styles.button} ${styles.addButton}`}
             onClick={() => appendLanguage({ name: "", level: "" })}
           >
-            Add Language
+            Ajouter Language
           </button>
         </div>
 
         {/* Technical Skills */}
         <div className={styles.section}>
-          <h3>Technical Skills</h3>
+          <h3>Compétences Technique</h3>
           {techSkillCategories.map((field, categoryIndex) => (
             <div key={field.id}>
               <input
@@ -248,7 +238,7 @@ const UpdateForm = ({ curriculumDetails }) => {
               })
             }
           >
-            Add Technical Skill Category
+            Ajouter une category de compéténce technique
           </button>
         </div>
 
@@ -299,7 +289,7 @@ const UpdateForm = ({ curriculumDetails }) => {
               })
             }
           >
-            Add Experience
+            Ajouter Experience
           </button>
         </div>
 
@@ -350,13 +340,13 @@ const UpdateForm = ({ curriculumDetails }) => {
               })
             }
           >
-            Add Education
+            Ajouter Education
           </button>
         </div>
 
         {/* Interests */}
         <div className={styles.section}>
-          <h3>Areas of Interest</h3>
+          <h3>{"Centre d'intérêt"}</h3>
           {interestFields.map((field, index) => (
             <input
               key={field.id}
@@ -370,12 +360,12 @@ const UpdateForm = ({ curriculumDetails }) => {
             className={`${styles.button} ${styles.addButton}`}
             onClick={() => appendInterest("")}
           >
-            Add Area of Interest
+            {" Ajouter centre d'intérêt"}
           </button>
         </div>
 
         <button type="submit" className={styles.button}>
-          Submit
+          Valider
         </button>
       </form>
     </div>

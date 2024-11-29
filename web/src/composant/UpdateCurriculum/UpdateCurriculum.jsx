@@ -4,7 +4,12 @@ import { useParams } from "react-router-dom";
 
 export default function UpdateCurriculum() {
   const { cvId } = useParams();
-  const { data: curriculumDetails } = useGetCurriculumById(cvId);
+  const { data: curriculumDetails, isLoading } = useGetCurriculumById(cvId);
+
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+
   return (
     <div>
       <UpdateForm curriculumDetails={curriculumDetails} />
