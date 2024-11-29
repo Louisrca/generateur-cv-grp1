@@ -18,3 +18,16 @@ export const webApiCall = (pathname, init) => {
     },
   });
 };
+
+export const webApiCallForUpload = (pathname, init) => {
+  const JWT_TOKEN = localStorage.getItem("jwt_token");
+
+  const API_URL = import.meta.env.VITE_PUBLIC_API_URL;
+
+  return makeApiCall(`${API_URL}${pathname}`, {
+    ...init,
+    headers: {
+      Authorization: `Bearer ${JWT_TOKEN}`,
+    },
+  });
+};

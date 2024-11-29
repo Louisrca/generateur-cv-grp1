@@ -73,6 +73,18 @@ const CreateCard = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h1>Profile Form</h1>
+      <span
+        style={{
+          fontWeight: "bold",
+          color: "blue",
+          marginTop: "50px",
+          marginBottom: "50px",
+        }}
+      >
+        {
+          " Vous pourrez ajouter une photo de profil dans l'onglet Edition de cv dans  Mes CV"
+        }
+      </span>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* General Information */}
         <div>

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import styles from "./UpdateForm.module.css";
 import { Checkbox } from "@mui/material";
+import UploadImage from "../UploadImage/UploadImage";
 
 const UpdateForm = ({ curriculumDetails = {} }) => {
   const { cvId } = useParams();
@@ -74,6 +75,7 @@ const UpdateForm = ({ curriculumDetails = {} }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Profile Form</h1>
+      <UploadImage cvId={cvId} />
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* General Information */}
         <div className={styles.section}>

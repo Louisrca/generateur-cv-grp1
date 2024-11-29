@@ -2,6 +2,7 @@ import styles from "./CurriculumView.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "react-bootstrap";
 import { useDeleteCurriculum } from "../../api/curriculum/curriculum";
+
 import PropTypes from "prop-types";
 import { Edit, Delete } from "@mui/icons-material";
 
@@ -37,6 +38,37 @@ export const CurriculumView = ({ userCurriculum }) => {
 
           <div key={uuidv4()} className={styles.container}>
             <div className={styles.sidebar}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "1.5rem",
+                  marginTop: "1.5rem",
+                }}
+              >
+                {curriculum?.imageUrl !== "/default-image.jpg" ? (
+                  <img
+                    style={{
+                      width: "6rem",
+                      height: "6rem",
+                      borderRadius: "50%",
+                    }}
+                    src={curriculum?.imageUrl}
+                    alt="profile"
+                  />
+                ) : (
+                  <img
+                    style={{
+                      width: "6rem",
+                      height: "6rem",
+                      borderRadius: "50%",
+                    }}
+                    src="./image.png"
+                    alt="profile"
+                  />
+                )}
+              </div>
+
               <h2>
                 {curriculum?.name} {curriculum?.lastname}
               </h2>

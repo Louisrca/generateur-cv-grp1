@@ -16,7 +16,6 @@ import UpdateUserCurriculum from "./pages/UpdateUserCurriculum/UpdateUserCurricu
 
 import UserRecommendation from "./pages/UserRecommendation/UserRecommendation";
 
-
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -42,10 +41,21 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/curriculum/:cvId" element={<Curriculum />} />
+          <Route
+            path="/curriculum/:cvId"
+            element={
+              <ProtectedRoute>
+                <Curriculum />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/profile/recommendation/:id"
-            element={<UserRecommendation />}
+            element={
+              <ProtectedRoute>
+                <UserRecommendation />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/my-cv"

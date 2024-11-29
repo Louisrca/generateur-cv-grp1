@@ -16,6 +16,36 @@ export const CurriculumPreview = ({ userCurriculum }) => {
         <div key={curriculum._id} className={styles.mainContainer}>
           <div key={uuidv4()} className={styles.container}>
             <div className={styles.sidebar}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "1.5rem",
+                  marginTop: "1.5rem",
+                }}
+              >
+                {curriculum?.imageUrl !== "/default-image.jpg" ? (
+                  <img
+                    style={{
+                      width: "6rem",
+                      height: "6rem",
+                      borderRadius: "50%",
+                    }}
+                    src={curriculum?.imageUrl}
+                    alt="profile"
+                  />
+                ) : (
+                  <img
+                    style={{
+                      width: "6rem",
+                      height: "6rem",
+                      borderRadius: "50%",
+                    }}
+                    src="/image.png"
+                    alt="profile"
+                  />
+                )}
+              </div>
               <h2>
                 {curriculum?.name} {curriculum?.lastname}
               </h2>
