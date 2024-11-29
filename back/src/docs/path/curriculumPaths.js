@@ -1,39 +1,39 @@
 /**
  * @swagger
- * /books:
+ * /curriculum:
  *   get:
- *     summary: Get all books
+ *     summary: Get all curriculums
  *     tags:
- *       - Books
+ *       - Curriculum
  *     responses:
  *       200:
- *         description: List of books
+ *         description: List of curriculums
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Book'
+ *                 $ref: '#/components/schemas/Curriculum'
  */
 
 /**
  * @swagger
- * /books/{id}:
+ * /curriculum/{id}:
  *   get:
- *     summary: Get a book by ID
- *     description: Retrieve details of a specific book by its ID.
+ *     summary: Get a curriculum by author
+ *     description: Retrieve details of a specific curriculum by its author.
  *     tags:
- *       - Books
+ *       - Curriculum
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the book to retrieve
+ *         description: The ID of the curriculum to retrieve
  *     responses:
  *       '200':
- *         description: Details of the book
+ *         description: Details of the curriculum
  *         content:
  *           application/json:
  *             schema:
@@ -48,19 +48,19 @@
  *                 description:
  *                   type: string
  *       '404':
- *         description: Book not found
+ *         description: Curriculum not found
  *       '500':
  *         description: Internal server error
  */
 
 /**
  * @swagger
- * /books/:
+ * /curriculum:
  *   post:
- *     summary: Create a new book
- *     description: Add a new book to the database.
+ *     summary: Create a new curriculum
+ *     description: Add a new curriculum to the database.
  *     tags:
- *       - Books
+ *       - Curriculum
  *     requestBody:
  *       required: true
  *       content:
@@ -79,7 +79,7 @@
  *               - author
  *     responses:
  *       '201':
- *         description: Book created successfully
+ *         description: Curriculum created successfully
  *       '400':
  *         description: Invalid input
  *       '500':
@@ -88,19 +88,19 @@
 
 /**
  * @swagger
- * /books/{id}:
+ * /curriculum/{id}:
  *   put:
- *     summary: Update an existing book
- *     description: Modify the details of a book by its ID.
+ *     summary: Update an existing curriculum
+ *     description: Modify the details of a curriculum by its ID.
  *     tags:
- *       - Books
+ *       - Curriculum
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the book to update
+ *         description: The ID of the curriculum to update
  *     requestBody:
  *       required: true
  *       content:
@@ -116,35 +116,35 @@
  *                 type: string
  *     responses:
  *       '200':
- *         description: Book updated successfully
+ *         description: Curriculum updated successfully
  *       '400':
  *         description: Invalid input
  *       '404':
- *         description: Book not found
+ *         description: Curriculum not found
  *       '500':
  *         description: Internal server error
  */
 
 /**
  * @swagger
- * /books/{id}:
+ * /curriculum/{id}:
  *   delete:
- *     summary: Delete a book by ID
- *     description: Remove a book from the database by its ID.
+ *     summary: Delete a curriculum by ID
+ *     description: Remove a curriculum from the database by its ID.
  *     tags:
- *       - Books
+ *       - Curriculum
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The ID of the book to delete
+ *         description: The ID of the curriculum to delete
  *     responses:
  *       '200':
- *         description: Book deleted successfully
+ *         description: Curriculum deleted successfully
  *       '404':
- *         description: Book not found
+ *         description: Curriculum not found
  *       '500':
  *         description: Internal server error
  */
