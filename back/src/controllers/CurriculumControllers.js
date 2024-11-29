@@ -6,9 +6,7 @@ const mongoose = require('mongoose');
 
 const getCurriculums = async (req, res) => {
   try {
-    const curriculum = await Curriculum.find({ isPublic: true }).populate(
-      'author'
-    );
+    const curriculum = await Curriculum.find({ isPublic: true });
     return res.json(curriculum);
   } catch (error) {
     return res.status(500).json({ error: `Internal server error : ${error}` });

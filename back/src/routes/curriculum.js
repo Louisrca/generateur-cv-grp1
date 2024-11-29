@@ -11,7 +11,7 @@ const {
   deleteCurriculum,
 } = require('../controllers/CurriculumControllers');
 
-router.get('/', verifyToken, getCurriculums);
+router.get('/', getCurriculums);
 
 router.get('/:id', verifyToken, getCurriculumByAuthor);
 
