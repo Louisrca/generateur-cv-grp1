@@ -1,8 +1,10 @@
 .mainContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: end;
   align-items: end;
   margin-top: 2rem;
+  gap: 1rem;
   max-width: 800px;
 }
 .buttonAction {
